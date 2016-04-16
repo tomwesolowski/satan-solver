@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tomek/Dropbox/solver/src/solver.cpp
+bits/stdc++.h
+-
+iostream
+-
+algorithm
+-
+vector
+-
+queue
+-
+list
+-
+climits
+-
+string
+-
+stack
+-
+map
+-
+set
+-
+cmath
+-
+cstdio
+-
+cstring
+-
+cstdlib
+-
+sstream
+-
+iomanip
+-
+cassert
+-
+
