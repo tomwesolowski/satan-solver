@@ -7,8 +7,13 @@ project(${PROGRAM_NAME})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/Modules )
 
 include_directories(${SRC})
+include_directories (${SRC}/types)
+include_directories (${SRC}/utils)
+include_directories (gtest)
+link_directories (lib)
 
 add_executable(${PROGRAM_NAME} ${SRC}/solver.cpp)
+target_link_libraries(${PROGRAM_NAME} gtest_main gtest pthread)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)

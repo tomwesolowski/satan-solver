@@ -1,1 +1,1 @@
-/usr/bin/c++    -Wall -std=c++11    CMakeFiles/solver.dir/src/solver.cpp.o  -o solver -rdynamic 
+/usr/bin/clang++    -Wall -std=c++11    CMakeFiles/solver.dir/src/solver.cpp.o  -o solver  -L/home/tomek/Dropbox/solver/lib -rdynamic -lgtest_main -lgtest -lpthread -Wl,-rpath,/home/tomek/Dropbox/solver/lib 

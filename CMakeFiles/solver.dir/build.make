@@ -56,15 +56,15 @@ CMakeFiles/solver.dir/src/solver.cpp.o: CMakeFiles/solver.dir/flags.make
 CMakeFiles/solver.dir/src/solver.cpp.o: src/solver.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/solver.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/tomek/Dropbox/solver/src/solver.cpp
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/tomek/Dropbox/solver/src/solver.cpp
 
 CMakeFiles/solver.dir/src/solver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/solver.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/solver.cpp > CMakeFiles/solver.dir/src/solver.cpp.i
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/solver.cpp > CMakeFiles/solver.dir/src/solver.cpp.i
 
 CMakeFiles/solver.dir/src/solver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/solver.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/solver.cpp -o CMakeFiles/solver.dir/src/solver.cpp.s
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/solver.cpp -o CMakeFiles/solver.dir/src/solver.cpp.s
 
 CMakeFiles/solver.dir/src/solver.cpp.o.requires:
 .PHONY : CMakeFiles/solver.dir/src/solver.cpp.o.requires
