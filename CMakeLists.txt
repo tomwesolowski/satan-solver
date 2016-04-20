@@ -12,8 +12,14 @@ include_directories (${SRC}/utils)
 include_directories (gtest)
 link_directories (lib)
 
-add_executable(${PROGRAM_NAME} ${SRC}/solver.cpp)
+add_executable(${PROGRAM_NAME} ${SRC}/utils/helpers.cpp
+															 ${SRC}/types/literal.cpp
+															 ${SRC}/types/clause.cpp
+															 ${SRC}/solver.cpp
+															 ${SRC}/test.cpp)
 target_link_libraries(${PROGRAM_NAME} gtest_main gtest pthread)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)

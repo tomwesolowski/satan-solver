@@ -9,40 +9,36 @@
 ./src/types/clause.h
 
 ./src/types/constants.h
+bits/stdc++.h
+-
 
 ./src/types/literal.h
-
-./src/types/model.h
+constants.h
+./src/types/constants.h
 
 ./src/utils/helpers.h
 
 ./src/utils/parser.h
 
-./src/utils/verificator.h
+/home/tomek/Dropbox/solver/src/solver.h
 
-/home/tomek/Dropbox/solver/src/solver.cpp
+/home/tomek/Dropbox/solver/src/test.cpp
 bits/stdc++.h
 -
-helpers.h
-/home/tomek/Dropbox/solver/src/helpers.h
 constants.h
 /home/tomek/Dropbox/solver/src/constants.h
 literal.h
 /home/tomek/Dropbox/solver/src/literal.h
+helpers.h
+/home/tomek/Dropbox/solver/src/helpers.h
 clause.h
 /home/tomek/Dropbox/solver/src/clause.h
-model.h
-/home/tomek/Dropbox/solver/src/model.h
 solver.h
 /home/tomek/Dropbox/solver/src/solver.h
 parser.h
 /home/tomek/Dropbox/solver/src/parser.h
-verificator.h
-/home/tomek/Dropbox/solver/src/verificator.h
 gtest.h
 /home/tomek/Dropbox/solver/src/gtest.h
-
-/home/tomek/Dropbox/solver/src/solver.h
 
 gtest/gtest.h
 limits

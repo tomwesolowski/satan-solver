@@ -5,12 +5,17 @@ CMakeFiles/solver.dir/src/solver.cpp.o
  ./src/types/clause.h
  ./src/types/constants.h
  ./src/types/literal.h
- ./src/types/model.h
  ./src/utils/helpers.h
- ./src/utils/parser.h
- ./src/utils/verificator.h
  /home/tomek/Dropbox/solver/src/solver.cpp
  /home/tomek/Dropbox/solver/src/solver.h
+CMakeFiles/solver.dir/src/test.cpp.o
+ ./src/types/clause.h
+ ./src/types/constants.h
+ ./src/types/literal.h
+ ./src/utils/helpers.h
+ ./src/utils/parser.h
+ /home/tomek/Dropbox/solver/src/solver.h
+ /home/tomek/Dropbox/solver/src/test.cpp
  gtest/gtest.h
  gtest/gtest/gtest-death-test.h
  gtest/gtest/gtest-message.h
@@ -33,3 +38,16 @@ CMakeFiles/solver.dir/src/solver.cpp.o
  gtest/gtest/internal/gtest-string.h
  gtest/gtest/internal/gtest-tuple.h
  gtest/gtest/internal/gtest-type-util.h
+CMakeFiles/solver.dir/src/types/clause.cpp.o
+ ./src/solver.h
+ ./src/utils/helpers.h
+ /home/tomek/Dropbox/solver/src/types/clause.cpp
+ /home/tomek/Dropbox/solver/src/types/clause.h
+ /home/tomek/Dropbox/solver/src/types/constants.h
+ /home/tomek/Dropbox/solver/src/types/literal.h
+CMakeFiles/solver.dir/src/types/literal.cpp.o
+ /home/tomek/Dropbox/solver/src/types/constants.h
+ /home/tomek/Dropbox/solver/src/types/literal.cpp
+ /home/tomek/Dropbox/solver/src/types/literal.h
+CMakeFiles/solver.dir/src/utils/helpers.cpp.o
+ /home/tomek/Dropbox/solver/src/utils/helpers.cpp

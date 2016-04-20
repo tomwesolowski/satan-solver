@@ -1,39 +1,25 @@
 #ifndef LITERAL_H
 #define LITERAL_H
 
+#include "constants.h"
+
 struct Literal {
   int varid;
   int sgn;
 
-  Literal() {}
+  Literal();
 
-  Literal(int v, int s = kUndefined) {
-    varid = abs(v);
-    sgn = s;
-  }
+  Literal(int v, int s = kUndefined);
 
-  int var() const { 
-  	return varid;
-  }
+  int var() const;
 
-  int sign() const { 
-  	return sgn;
-  }
+  int sign() const;
 
-  Literal operator-() {
-    return Literal(var(), (sign() == kNegative ? kPositive : kNegative));
-  }
+  Literal operator-();
 
-  bool operator<(const Literal& lit) const {
-  	if(var() != lit.var()) {
-  		return var() < lit.var();
-  	}
-  	return sign() < lit.sign();
-  }
+  bool operator<(const Literal& lit) const;
 
-  bool operator==(const Literal& lit) const {
-  	return var() == lit.var() && sign() == lit.sign();
-  }
+  bool operator==(const Literal& lit) const;
 };
 
 #endif

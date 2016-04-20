@@ -1,6 +1,6 @@
-void Assert(bool cond, string msg) {
-	if(!cond) {
-		cerr << msg << endl;
-		assert(false);
-	}
-}
+#ifndef HELPERS_H
+#define HELPERS_H
+
+void Assert(bool cond, string msg);
+
+#endif

@@ -62,7 +62,7 @@ CMAKE_BINARY_DIR = /home/tomek/Dropbox/solver
 CMakeFiles/solver.dir/all:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/depend
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles  1 2 3 4 5
 	@echo "Built target solver"
 .PHONY : CMakeFiles/solver.dir/all
 
@@ -72,7 +72,7 @@ all: CMakeFiles/solver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/solver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/Dropbox/solver/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/Dropbox/solver/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/solver.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/Dropbox/solver/CMakeFiles 0
 .PHONY : CMakeFiles/solver.dir/rule

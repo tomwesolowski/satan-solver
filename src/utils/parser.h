@@ -30,7 +30,6 @@ struct Parser {
 		int num_vars = GetInt();
 		int num_clauses = GetInt();
 
-
 		solver.InitVars(num_vars);
 
 		//clauses

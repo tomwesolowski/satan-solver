@@ -3,17 +3,20 @@
 
 class Solver;
 
-struct Clause {
+class Clause {
+public:
   vector<Literal> lits_;
+  int watch_pointer_ = 2;
 
-  static shared_ptr<Clause> Create(Solver* solver, vector<Literal>& lits) { 
-  	return make_shared<Clause>(lits);
-  }
+  static shared_ptr<Clause> Create(Solver* solver, vector<Literal>& lits);
 
-  Clause(vector<Literal>& lits) {
-  	lits_ = lits;
-  }
+  Clause(vector<Literal>& lits);
 
+  int FindWatcher(Solver* solver, int i);
+
+  bool FindWatchers(Solver* solver);
 };
+
+typedef shared_ptr<Clause> RefClause;
 
 #endif

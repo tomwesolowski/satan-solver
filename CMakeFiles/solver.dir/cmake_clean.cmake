@@ -1,5 +1,9 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/solver.dir/src/utils/helpers.cpp.o"
+  "CMakeFiles/solver.dir/src/types/literal.cpp.o"
+  "CMakeFiles/solver.dir/src/types/clause.cpp.o"
   "CMakeFiles/solver.dir/src/solver.cpp.o"
+  "CMakeFiles/solver.dir/src/test.cpp.o"
   "solver.pdb"
   "solver"
 )
