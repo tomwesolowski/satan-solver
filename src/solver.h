@@ -1,6 +1,7 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
+
 const int DEBUG = 0;
 #define Cerr if(DEBUG) cerr
 
@@ -9,8 +10,11 @@ class Solver {
 	std::default_random_engine generator_;
 	
 	vector<int> var_level_;
-  vector<int> free_vars_;
+  set< pair<int, int> > free_vars_; // <activeness, var>
+  vector<int> activeness_; // number of clauses with literal i
+
   vector< vector<RefClause > > watchers_;
+
   vector<RefClause> clauses_;
   queue<Literal> prop_queue_; // <var, value>
   vector<int> in_prop_queue_;
@@ -18,11 +22,15 @@ class Solver {
   vector<VarAssignment> trail_; //<var, both_ways>
   vector<int> decision_levels_; // <var> - parent of level
 
-  int state_ = kUnknown;
+  int state_ = kUnknownState;
 
  	vector<int> vars_;
 
   void InitVars(int num_vars);
+
+  void AddToFreeVars(int var);
+
+  void PrepareFreeVars();
   
   void AddClause(vector<Literal> lits);
 
@@ -43,11 +51,13 @@ class Solver {
 
   void AddToTrail(int var) ;
 
-  bool Verify();
+  bool Verify(bool solvable = true);
 
   bool Solve();
 
-  bool UpdateWatchers(RefClause clause, bool forceAdd = false);
+  int InitWatchers(RefClause clause);
+
+  int UpdateWatcher(RefClause clause, Literal lit);
 
   bool Enqueue(Literal lit);
 
@@ -58,6 +68,7 @@ class Solver {
   void SetVar(int var, int val);
 
   void UnsetVar(int var);
+
 
   void RemoveFree(int var);
 

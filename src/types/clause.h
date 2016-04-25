@@ -12,9 +12,7 @@ public:
 
   Clause(vector<Literal>& lits);
 
-  int FindWatcher(Solver* solver, int i);
-
-  bool FindWatchers(Solver* solver);
+  int FindWatcher(Solver* solver);
 };
 
 typedef shared_ptr<Clause> RefClause;

@@ -19,7 +19,7 @@ add_executable(${PROGRAM_NAME} ${SRC}/utils/helpers.cpp
 															 ${SRC}/test.cpp)
 target_link_libraries(${PROGRAM_NAME} gtest_main gtest pthread)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -O2")
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)

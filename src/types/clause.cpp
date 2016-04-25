@@ -16,14 +16,24 @@ Clause::Clause(vector<Literal>& lits) {
 	lits_ = lits;
 }
 
-int Clause::FindWatcher(Solver* solver, int i) {
-	if(solver->GetLitValue(lits_[i]) == kUndefined) {
-		return 0;
+// new watcher always at index 0
+int Clause::FindWatcher(Solver* solver) {
+
+	Assert(solver->GetLitValue(lits_[0]) != kUndefined, "First literal is not assigned!");
+
+	int free_vars = 0;
+
+	if(solver->GetLitValue(lits_[0]) == kPositive || 
+		solver->GetLitValue(lits_[1]) == kPositive) {
+		return kHoldWatcher;
 	}
 
-  if(lits_.size() <= 2) {
-    return -1;
-  }
+	for(int j = 2; j < lits_.size(); j++) {
+		if(solver->GetLitValue(lits_[j]) == kUndefined && 
+			 solver->GetLitValue(lits_[1]) == kNegative) {
+				Assert(false, "Undefined value among nonwatcher while second watcher = Negative");
+		}
+	}
 
 	/*
 	auto& watchers = solver->watchers_[lits[i].var()];
@@ -42,18 +52,36 @@ int Clause::FindWatcher(Solver* solver, int i) {
 	Assert(found, "Old watcher not found");
 	*/
 
+	/* only for debug, it should not be comment
+	if(solver->GetLitValue(lits_[0]) == kNegative) {
+  	return kUnsatisfiableClause;	
+  }
+  */
+
+	bool found = false;
+
 	for(int j = 2; j < lits_.size(); j++) {
-    if(solver->GetLitValue(lits_[j]) == kUndefined) {
-      swap(lits_[i], lits_[j]);
-      return 1;
+    if(solver->GetLitValue(lits_[j]) != kNegative) {
+      swap(lits_[0], lits_[j]);
+      found = true;
+      break;
     }
   }
-	return -1;
-}
 
-bool Clause::FindWatchers(Solver* solver) {
-	for(int i = 0; i < 2; i++) {
-		if(!FindWatcher(solver, i)) return false;
-	}
-	return true;
+  if(solver->GetLitValue(lits_[0]) == kNegative
+  	&& solver->GetLitValue(lits_[1]) == kNegative) {
+
+  	return kUnsatisfiableClause;	
+  }
+
+  if(!found) {
+  	Assert(solver->GetLitValue(lits_[1]) == kUndefined, "Returns unit while there is no unit");
+  	return kUnitClause;
+  }
+
+  return kReleaseWatcher;
+
+  //Cerr << solver->GetLitValue(lits_[0]) << " " << solver->GetLitValue(lits_[1]) << endl;
+
+	//return (free_vars == 1 ? kUnitClause : kUnsatisfiableClause);
 }

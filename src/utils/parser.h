@@ -1,34 +1,25 @@
 struct Parser {
 
 	string line_;
-	stringstream sstream_;
 
-	string GetString() {
-		string tmp;
-		sstream_ >> tmp;
-		return tmp;
-	}
-
-	int GetInt() {
-		int tmp;
-		sstream_ >> tmp;
-		return tmp;
-	}
 
 	void Parse(ifstream& ifs, Solver &solver) {
 		//comments
-		while(getline(ifs, line_)) {
-			if(line_[0] != 'c') break;
-		}
-		sstream_.clear();
 
-		//parameters
-		sstream_ << line_;
-		assert(GetString() == "p");
-		assert(GetString() == "cnf");
+		Assert(ifs.good(), "Stream is not opened.");
+
+		bool found_start = false;
+		while(ifs >> line_) {
+			if(line_ == "cnf") {
+				found_start = true;
+				break;
+			}
+		}
+
+		Assert(found_start, "CNF not found");
 		
-		int num_vars = GetInt();
-		int num_clauses = GetInt();
+		int num_vars, num_clauses;
+		ifs >> num_vars >> num_clauses;
 
 		solver.InitVars(num_vars);
 
