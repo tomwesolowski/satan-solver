@@ -64,6 +64,8 @@ class Solver {
 
   void RemoveFree(int var);
 
+  void Simplify();
+
   int GetNumFree();
 
   int CurrentDecisionLevel();

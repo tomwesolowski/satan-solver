@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+./src/solver.h
+
 ./src/types/clause.h
 
 ./src/types/constants.h
@@ -19,6 +21,20 @@ constants.h
 ./src/utils/helpers.h
 
 ./src/utils/parser.h
+
+/home/tomek/Dropbox/solver/src/solver.cpp
+bits/stdc++.h
+-
+constants.h
+/home/tomek/Dropbox/solver/src/constants.h
+literal.h
+/home/tomek/Dropbox/solver/src/literal.h
+helpers.h
+/home/tomek/Dropbox/solver/src/helpers.h
+clause.h
+/home/tomek/Dropbox/solver/src/clause.h
+solver.h
+/home/tomek/Dropbox/solver/src/solver.h
 
 /home/tomek/Dropbox/solver/src/solver.h
 
@@ -39,6 +55,30 @@ parser.h
 /home/tomek/Dropbox/solver/src/parser.h
 gtest.h
 /home/tomek/Dropbox/solver/src/gtest.h
+
+/home/tomek/Dropbox/solver/src/types/clause.cpp
+bits/stdc++.h
+-
+constants.h
+/home/tomek/Dropbox/solver/src/types/constants.h
+helpers.h
+/home/tomek/Dropbox/solver/src/types/helpers.h
+literal.h
+/home/tomek/Dropbox/solver/src/types/literal.h
+clause.h
+/home/tomek/Dropbox/solver/src/types/clause.h
+solver.h
+/home/tomek/Dropbox/solver/src/types/solver.h
+
+/home/tomek/Dropbox/solver/src/types/clause.h
+
+/home/tomek/Dropbox/solver/src/types/constants.h
+bits/stdc++.h
+-
+
+/home/tomek/Dropbox/solver/src/types/literal.h
+constants.h
+/home/tomek/Dropbox/solver/src/types/constants.h
 
 gtest/gtest.h
 limits

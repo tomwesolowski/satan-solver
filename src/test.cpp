@@ -40,8 +40,96 @@ TEST(f1, Sample) {
   solver.Verify(false);
   solver.Print();
 }
-*/
+
+
 TEST(f2, Sample) {
+	for(int i = 2; i <= 8; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/pret/pret" + s + ".cnf");
+
+		Parser parser;
+		Solver solver;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify(i>4);
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+*/
+
+TEST(f5, Sample) {
+	for(int i = 1; i < 100; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/uf125/uf125-0" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+TEST(Parity, PAR16) {
+	for(int i = 1; i <= 1; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/parity/par16-" + s + ".cnf");
+
+		Parser parser;
+		Solver solver;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+
+
+TEST(SSA, SSA) {
+	for(int i = 1; i < 9; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/ssa/ss" + s + ".cnf");
+
+		Parser parser;
+		Solver solver;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify(i>4);
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+/*
+
+
+
+TEST(f4, Sample) {
 	for(int i = 1; i <= 99; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;
@@ -60,7 +148,10 @@ TEST(f2, Sample) {
 	
 }
 
-TEST(f5, Sample) {
+
+
+
+TEST(f6, Sample) {
 	for(int i = 1; i < 100; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;
@@ -79,7 +170,6 @@ TEST(f5, Sample) {
 	
 }
 
-/*
 
 TEST(f3, Sample) {
 	for(int i = 1; i < 100; i++) {

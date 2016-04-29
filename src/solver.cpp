@@ -44,29 +44,30 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 			}
 			last_var = lit.var();
 		}
+	}
 
 		//TODO
-		for(Literal& lit : lits) {
-			if(IsVarFree(lit.var())) {
-				RemoveFree(lit.var());
-				activeness_[lit.var()]++;
-				AddToFreeVars(lit.var());
-			}
-			else {
-				activeness_[lit.var()]++;
-			}
+	for(Literal& lit : lits) {
+		if(IsVarFree(lit.var())) {
+			RemoveFree(lit.var());
+			activeness_[lit.var()] += 50 - lits.size();
+			AddToFreeVars(lit.var());
+		}
+		else {
+			activeness_[lit.var()] += 50 - lits.size();
 		}
 	}
 
 	assert(lits.size() > 0);
 
 	if(learnt) {
+		//cerr << "Learnt size: " << lits.size() << endl;
 		assert(lits.size() > 1 || CurrentDecisionLevel() == 0);
 	}
 
 	//assert(!learnt || lits.size() > 1);
 	//if(learnt && CurrentDecisionLevel() == 0) {
-		for(Literal lit : lits) {
+	/*	for(Literal lit : lits) {
 			Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << " ";
 		}
 		Cerr << "#" << CurrentDecisionLevel() << endl;
@@ -75,7 +76,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 	for(Literal lit : trail_) {
 		Cerr << lit.var() << ":" << lit.sign() << ":" << level_[lit.var()] << " .. ";
 	}
-	Cerr << endl;
+	Cerr << endl;*/
 
 	if(lits.size() <= 1) {
 		if(!Enqueue(lits[0])) {
@@ -94,10 +95,6 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 			if(level_[lits[i].var()] > level_[lits[1].var()]) {
 				swap(lits[1], lits[i]);
 			}
-		}
-
-		for(int i = 2; i < lits.size(); i++) {
-			//assert(level_[lits[i].var()] < level_[lits[1].var()]);
 		}
 	}
 
@@ -133,11 +130,11 @@ void Solver::Decide() {
 	if(watchers_[lit_neg.index()].size() > 
 			watchers_[lit_pos.index()].size()) {
 		clause = watchers_[lit_neg.index()][0];
-		lit = lit_neg;
+		lit = lit_pos;
 	}
 	else if(watchers_[lit_pos.index()].size()) {
 		clause = watchers_[lit_pos.index()][0];
-		lit = lit_pos;
+		lit = lit_neg;
 	}
 	else {
 		lit = Literal(var_free, kPositive);
@@ -179,34 +176,27 @@ RefClause Solver::Propagate() {
 
   		int status = UpdateWatcher(clause, -lit);
 
-  		//bool is_unit = IsUnitClause(clause);
-  		
-  		//Cerr << "status:" << status << " unit:" << is_unit << endl;
-  		/*Assert( (status == kUnitClause && is_unit) || 
-  			      (status != kUnitClause && !is_unit), 
-  			      "(Not)Unitary clause status is wrong!");
-
-			if(status == kUnsatisfiableClause) {
-  			Cerr << "conflict!" << clause->id_ <<  endl;
-  			conflict = clause;
-  			break;
-  		}*/
-
   		if(status == kUnitClause) {
-  			Cerr << "unit! " << clause->id_ << endl;
+  			/*Cerr << "unit! " << clause->id_ << endl;
   			for(Literal lit : clause->lits_) {
 					Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << " ";
 				}
-				Cerr << endl;
+				Cerr << endl;*/
   			Literal unit = GetUnitLiteral(clause);
-  			//Assert(GetLitValue(unit) == kUndefined, "Unit must be undefined");
+
   			if(!Enqueue(unit, clause)) {
   				Cerr << "and conflict " << unit.var() << " " << GetVarValue(unit.var()) << " " << unit.sign() << " " << clause->lits_.size() << endl;
-  				for(Literal lit : trail_) {
+  				/*for(Literal lit : trail_) {
 						Cerr << lit.var() << ":" << lit.sign() << ":" << level_[lit.var()] << " .. ";
 					}
-					Cerr << endl;
+					Cerr << endl;*/
   				conflict = clause;
+
+  				//todo
+  				for(Literal& lit : conflict->lits_) {
+  					activeness_[lit.var()]++;
+  				}
+
   				break;
   			}
   		}
@@ -256,7 +246,6 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 	vector<Literal> reason;
   int max_level = 0;
   int counter = 0;
-  int iter = 0;
   int currentLevel = CurrentDecisionLevel();
 
   for(Literal lit : conflict->lits_) {
@@ -278,7 +267,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 				Cerr << ">" << lit.var() << " " << lit.sign() << endl;
 				if(lit == p) found = 1;
 			}
-			assert(found);
+			Assert(found, "p literal not found in conflict");
 		}
 		for(Literal& lit : conflict->lits_) {
 			if(lit.var() != p.var()) {
@@ -314,11 +303,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   	counter--;
   } while(counter > 0);
 
-	/*for(Literal& lit : conflict->lits_) {
-		max_level = max(max_level, level_[lit.var()]);
-	}*/
-
-	//Assert(currentLevel == CurrentDecisionLevel(), "Dec. level has changed");
+	Assert(currentLevel == CurrentDecisionLevel(), "Dec. level has changed");
 
 	learnt_clause.push_back(-p);
 	swap(learnt_clause.front(), learnt_clause.back());
@@ -328,7 +313,6 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 		fr += (GetLitValue(lit) == kUndefined);
 	}
 	Assert(fr == 1, "Learnt clause must contain exactly one undef. literal. has: " + to_string(fr));
-	//Cerr << endl << "L: " << learnt_clause[0].var() << endl;
 	Assert(GetVarValue(learnt_clause[0].var()) == kUndefined, 
 			"Learnt clause must contain lit[0] == Undefined");
 
@@ -344,6 +328,9 @@ bool Solver::Search() {
       if(!GetNumFree()) {
       	return true;
       }
+      if(CurrentDecisionLevel() == 0) {
+    		Simplify();
+    	}
       Decide();
     } else {
     	if(CurrentDecisionLevel() <= 0) {
@@ -385,9 +372,35 @@ bool Solver::Enqueue(Literal lit, RefClause from) {
 		for(Literal x : from->lits_) {
 			found += (x == lit);
 		}
-		assert(found);
+		Assert(found, "Literal not found in reason during enqueuing");
 	}
 	return true;
+}
+
+void Solver::Simplify() {
+	for(int i = 0; i < clauses_.size(); i++) {
+		RefClause& clause = clauses_[i];
+		bool deleted = false;
+		int k = 0;
+		for(int j = 0; j < clause->lits_.size(); j++) {
+			Literal& lit = clause->lits_[j];
+			if(IsLitPositive(lit)) {
+				//remove clauses as it's always satisfied
+				swap(clauses_[i], clauses_.back());
+				clauses_.pop_back();
+				i--; deleted = true;
+				break;
+			}
+			if(!IsLitNegative(lit)) {
+				clause->lits_[k] = lit;
+				k++;
+			}
+		}
+		if(!deleted) {
+			clause->lits_.resize(k);
+			Assert(k, "Simplified clause is not satisfiable - conflict not found eariler");
+		}
+	}
 }
 
 void Solver::UnsetVar() { 
@@ -414,6 +427,7 @@ bool Solver::Verify(bool solvable) {
 		Assert(!solvable, "Assignment not found to solvable instance");
 		return true;
 	}
+	Assert(solvable, "Assignment found but it's not solvable :D");
 	for(RefClause clause : clauses_) {
 		bool satisfied = false;
 		for(Literal& lit : clause->lits_) {
@@ -464,9 +478,6 @@ int Solver::UpdateWatcher(RefClause clause, Literal lit) {
 	if(status & kUnitClause) {
 		return kUnitClause;
 	}
-	/*else if(status & kUnsatisfiableClause) {
-		return kUnsatisfiableClause;
-	}*/
 	return kNormalClause;
 }
 
@@ -504,11 +515,6 @@ bool Solver::IsUnitClause(RefClause clause) {
 }
 
 Literal Solver::GetUnitLiteral(RefClause clause) { 
-	/*for(int i = 0; i < 2; i++) {
-		if(GetLitValue(clause->lits_[i]) == kUndefined) {
-			return clause->lits_[i];
-		}
-	}*/
 	return clause->lits_[1];
 	Assert(false, "Unit literal not found.");
 	assert(false); // omit warning

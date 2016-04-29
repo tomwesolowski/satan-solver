@@ -2,6 +2,9 @@
 #define CLAUSE_H
 
 class Solver;
+class Clause;
+
+typedef shared_ptr<Clause> RefClause;
 
 class Clause {
 public:
@@ -12,13 +15,12 @@ public:
 
   int id_;
 
-  static shared_ptr<Clause> Create(Solver* solver, vector<Literal>& lits);
+  static RefClause Create(Solver* solver, vector<Literal>& lits);
 
   Clause(vector<Literal>& lits, int id);
 
   int FindWatcher(Solver* solver);
 };
 
-typedef shared_ptr<Clause> RefClause;
 
 #endif
