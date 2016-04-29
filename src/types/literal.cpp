@@ -1,9 +1,11 @@
 #include "literal.h"
 
-Literal::Literal() {}
+Literal::Literal() {
+	sgn = kUndefined;
+}
 
 Literal::Literal(int v, int s) {
-  varid = abs(v);
+  varid = v;
   sgn = s;
 }
 
@@ -15,7 +17,12 @@ int Literal::sign() const {
 	return sgn;
 }
 
+int Literal::index() const { 
+	return 2 * varid + (sign() != kPositive);
+}
+
 Literal Literal::operator-() {
+	assert(sign() != kUndefined);
   return Literal(var(), (sign() == kNegative ? kPositive : kNegative));
 }
 

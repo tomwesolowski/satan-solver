@@ -9,17 +9,18 @@ class Solver {
  public:
 	std::default_random_engine generator_;
 	
-	vector<int> var_level_;
+	vector<int> level_;
   set< pair<int, int> > free_vars_; // <activeness, var>
   vector<int> activeness_; // number of clauses with literal i
 
   vector< vector<RefClause > > watchers_;
 
+  vector<RefClause> reason_;
+  vector<RefClause> assumptions_;
   vector<RefClause> clauses_;
   queue<Literal> prop_queue_; // <var, value>
-  vector<int> in_prop_queue_;
 
-  vector<VarAssignment> trail_; //<var, both_ways>
+  vector<Literal> trail_; //<var, both_ways>
   vector<int> decision_levels_; // <var> - parent of level
 
   int state_ = kUnknownState;
@@ -31,8 +32,10 @@ class Solver {
   void AddToFreeVars(int var);
 
   void PrepareFreeVars();
+
+  void MakeAssumptions();
   
-  void AddClause(vector<Literal> lits);
+  bool AddClause(vector<Literal> lits, bool learnt = false);
 
   void Decide();
 
@@ -41,38 +44,29 @@ class Solver {
   //level - the latest level to NOT be erased
   bool Backtrack(int level);
 
-  int Analyze(RefClause conflict);
+  int Analyze(RefClause conflict, vector<Literal>& learnt_clause);
 
   bool Search();
 
-  bool AddToPropagateQueue(Literal lit);
-
   Literal RemoveFromPropagateQueue();
-
-  void AddToTrail(int var) ;
 
   bool Verify(bool solvable = true);
 
   bool Solve();
 
-  int InitWatchers(RefClause clause);
-
   int UpdateWatcher(RefClause clause, Literal lit);
 
-  bool Enqueue(Literal lit);
+  bool Enqueue(Literal lit, RefClause from = nullptr);
 
   int FlipValue(int value);
 
-  void FlipVar(int var) ;
-
-  void SetVar(int var, int val);
-
-  void UnsetVar(int var);
-
+  void UnsetVar();
 
   void RemoveFree(int var);
 
   int GetNumFree();
+
+  int CurrentDecisionLevel();
 
   bool IsUnitClause(RefClause clause);
 
@@ -95,6 +89,8 @@ class Solver {
   bool IsVarNegative(int var);
 
   bool IsVarUndefined(int var);
+
+  bool IsVarFree(int var);
 
   void SetSat();
 

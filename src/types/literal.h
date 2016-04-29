@@ -15,6 +15,8 @@ struct Literal {
 
   int sign() const;
 
+  int index() const;
+
   Literal operator-();
 
   bool operator<(const Literal& lit) const;

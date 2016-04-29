@@ -8,11 +8,13 @@ using namespace std;
 #include "clause.h"
 #include "solver.h"
 
-shared_ptr<Clause> Clause::Create(Solver* solver, vector<Literal>& lits) { 
-	return make_shared<Clause>(lits);
+shared_ptr<Clause> Clause::Create(Solver* solver, vector<Literal>& lits) {
+	static int id = 0; 
+	return make_shared<Clause>(lits, id++);
 }
 
-Clause::Clause(vector<Literal>& lits) {
+Clause::Clause(vector<Literal>& lits, int id) {
+	id_ = id;
 	lits_ = lits;
 }
 
@@ -21,65 +23,43 @@ int Clause::FindWatcher(Solver* solver) {
 
 	Assert(solver->GetLitValue(lits_[0]) != kUndefined, "First literal is not assigned!");
 
-	int free_vars = 0;
+  assert(solver->GetLitValue(lits_[0]) == kNegative);
 
-	if(solver->GetLitValue(lits_[0]) == kPositive || 
-		solver->GetLitValue(lits_[1]) == kPositive) {
-		return kHoldWatcher;
+	if(solver->GetLitValue(lits_[1]) == kPositive) {
+		return kHoldWatcher | kNormalClause;
 	}
 
+	///FOR DEBUG
 	for(int j = 2; j < lits_.size(); j++) {
 		if(solver->GetLitValue(lits_[j]) == kUndefined && 
 			 solver->GetLitValue(lits_[1]) == kNegative) {
-				Assert(false, "Undefined value among nonwatcher while second watcher = Negative");
+				//Assert(false, "Undefined value among nonwatcher while second watcher = Negative");
 		}
 	}
-
-	/*
-	auto& watchers = solver->watchers_[lits[i].var()];
-	bool found = false;
-
-	//removing old watcher
-	for(int j = 0; j < watchers.size(); j++) {
-		if(watchers[j].get() == this) {
-			swap(watchers[j], watchers.back());
-			watchers.pop_back();
-			found = true;
-			break;
-		}
-	}
-
-	Assert(found, "Old watcher not found");
-	*/
-
-	/* only for debug, it should not be comment
-	if(solver->GetLitValue(lits_[0]) == kNegative) {
-  	return kUnsatisfiableClause;	
-  }
-  */
-
-	bool found = false;
-
 	for(int j = 2; j < lits_.size(); j++) {
     if(solver->GetLitValue(lits_[j]) != kNegative) {
-      swap(lits_[0], lits_[j]);
-      found = true;
-      break;
+    	swap(lits_[0], lits_[j]);
+      return kNewWatcher | kNormalClause;
     }
+  }
+
+  return kHoldWatcher | kUnitClause;
+
+  /*if(solver->GetLitValue(lits_[0]) == kPositive) {
+  	return kNewWatcher | kNormalClause;
   }
 
   if(solver->GetLitValue(lits_[0]) == kNegative
   	&& solver->GetLitValue(lits_[1]) == kNegative) {
-
-  	return kUnsatisfiableClause;	
+  	return kHoldWatcher | kUnsatisfiableClause;	
   }
 
-  if(!found) {
-  	Assert(solver->GetLitValue(lits_[1]) == kUndefined, "Returns unit while there is no unit");
-  	return kUnitClause;
+  if(found == 1 && solver->GetLitValue(lits_[1]) == kNegative) {
+  	return kNewWatcher | kUnitClause;
   }
-
-  return kReleaseWatcher;
+  if(found == 0 && solver->GetLitValue(lits_[1]) == kUndefined) {
+  	return kHoldWatcher | kUnitClause;
+  }*/
 
   //Cerr << solver->GetLitValue(lits_[0]) << " " << solver->GetLitValue(lits_[1]) << endl;
 
