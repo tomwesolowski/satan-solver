@@ -32,10 +32,6 @@ class Solver {
 
   void InitVars(int num_vars);
 
-  void AddToFreeVars(int var);
-
-  void PrepareFreeVars();
-
   void MakeAssumptions();
   
   bool AddClause(vector<Literal> lits, bool learnt = false);
@@ -94,8 +90,6 @@ class Solver {
   bool IsVarNegative(int var);
 
   bool IsVarUndefined(int var);
-
-  bool IsVarFree(int var);
 
   void SetSat();
 

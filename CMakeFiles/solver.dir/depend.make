@@ -58,6 +58,12 @@ CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Constants.h
 CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Literal.cpp
 CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Literal.h
 
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/Solver.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/types/ClauseDatabase.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/utils/Helpers.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/Clause.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/Constants.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/Literal.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.cpp
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.h
 

@@ -9,30 +9,16 @@ using namespace std;
 
 shared_ptr<Clause> NullClause = nullptr;
 
-void Solver::AddToFreeVars(int var) {
-	//Cerr << "add " << var+1 << ":" << var_db_.activeness_[var] << endl;
-	//var_db_.activeness_[var] = rand(); //FOR DEBUG
-	Assert(!IsVarFree(var), "AddToFreeVars: Trying to add to free vars again");
-	var_db_.free_vars_.insert({var_db_.activeness_[var], var});
-}
-
-void Solver::PrepareFreeVars() {
-	for(int i = 0; i < vars_.size(); i++) {
-		AddToFreeVars(i);
-	}
-}
 
 void Solver::InitVars(int num_vars) { 
 	vars_.resize(num_vars, kUndefined);
 	reason_.resize(num_vars, nullptr);
 	watchers_.resize(2*num_vars);
 	level_.resize(num_vars);
-	var_db_.activeness_.resize(num_vars, 0);
-	PrepareFreeVars();
+	var_db_.Init(this);
 }
 
 bool Solver::AddClause(vector<Literal> lits, bool learnt) { 
-
 	if(!learnt) {
 		sort(lits.begin(), lits.end());
 		lits.resize(distance(lits.begin(), unique(lits.begin(), lits.end())));	
@@ -48,14 +34,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 
 		//TODO
 	for(Literal& lit : lits) {
-		if(IsVarFree(lit.var())) {
-			RemoveFree(lit.var());
-			var_db_.activeness_[lit.var()] += 50 - lits.size();
-			AddToFreeVars(lit.var());
-		}
-		else {
-			var_db_.activeness_[lit.var()] += 50 - lits.size();
-		}
+		var_db_.BumpActivity(this, lit.var(), 50-lits.size());
 	}
 
 	assert(lits.size() > 0);
@@ -165,7 +144,7 @@ RefClause Solver::Propagate() {
 
   				//todo
   				for(Literal& lit : conflict->lits_) {
-  					var_db_.activeness_[lit.var()]++;
+  					var_db_.BumpActivity(this, lit.var());
   				}
 
   				break;
@@ -330,7 +309,7 @@ bool Solver::Enqueue(Literal lit, RefClause from) {
 		}
 		return true;
 	}
-	RemoveFree(lit.var());
+	var_db_.RemoveFree(this, lit.var());
 	trail_.push_back(lit);
 	vars_[lit.var()] = lit.sign(); 
 	level_[lit.var()] = decision_levels_.size();
@@ -377,7 +356,7 @@ void Solver::UnsetVar() {
 	int var = trail_.back().var();
 	Assert(vars_[var] != kUndefined, "Un-assigning non-undefined var.");
 	
-	AddToFreeVars(var);
+	var_db_.AddToFreeVars(this, var);
 	vars_[var] = kUndefined; 
 	reason_[var] = nullptr;
 	level_[var] = -1;
@@ -454,11 +433,6 @@ int Solver::FlipValue(int value) {
 	return (value == kPositive ? kNegative : kPositive);
 }
 
-void Solver::RemoveFree(int var) {
-	//Cerr << "rem " << var << ":" << var_db_.activeness_[var] << endl;
-	Assert(IsVarFree(var), "Variable was not free");
-	var_db_.free_vars_.erase({var_db_.activeness_[var], var});
-}
 
 int Solver::GetNumFree() {
 	return var_db_.free_vars_.size();
@@ -527,8 +501,6 @@ bool Solver::IsVarPositive(int var) { return GetVarValue(var) == kPositive; }
 bool Solver::IsVarNegative(int var) { return GetVarValue(var) == kNegative; }
 
 bool Solver::IsVarUndefined(int var) { return GetVarValue(var) == kUndefined; }
-
-bool Solver::IsVarFree(int var) { return var_db_.free_vars_.count({var_db_.activeness_[var], var}) == 1; }
 
 void Solver::SetSat() { state_ = kSatisfiableState; }
 

@@ -59,6 +59,12 @@ CMakeFiles/solver.dir/src/types/Literal.cpp.o
  /home/tomek/Dropbox/solver/src/types/Literal.cpp
  /home/tomek/Dropbox/solver/src/types/Literal.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
+ ./src/Solver.h
+ ./src/types/ClauseDatabase.h
+ ./src/utils/Helpers.h
+ /home/tomek/Dropbox/solver/src/types/Clause.h
+ /home/tomek/Dropbox/solver/src/types/Constants.h
+ /home/tomek/Dropbox/solver/src/types/Literal.h
  /home/tomek/Dropbox/solver/src/types/VarDatabase.cpp
  /home/tomek/Dropbox/solver/src/types/VarDatabase.h
 CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
