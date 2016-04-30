@@ -31,9 +31,10 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 + Efficient use of cache
 + Much more heuristics coming from papers and our minds
 + Many small programming tweaks that improve performance
++ Analyzing MINSAT 2.2 and GLUCOSE solvers and pilfering good ideas
 + Experimenting, experimenting, experimenting...
 
 We test efficiency our solver with benchmarks provided by:
 http://www.cs.ubc.ca/~hoos/SATLIB/benchm.html
 
-At present time, SATan solver outperforms GRASP on big part of benchmarks and CHAFF on a few (and counting!).
+At present time [30.04.16], SATan solver outperforms GRASP on big part of benchmarks and CHAFF on a few (and counting!).
