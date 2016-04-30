@@ -5,8 +5,10 @@
 <h3> The goal </h3>
 
 Our goal is to create fast (as hell!) and still simple SAT solver that could bravely compete with modern state-of-the-art solvers. This is the first time we create our own SAT solver - we want to learn from the others, benefit from the experiences of our <s>older</s> more experienced friends and build up our project on them. 
-For this reason, the primary version of our solver is mainly based on MINISAT and its implementation (comprehensively described here: http://www.decision-procedures.org/handouts/MiniSat.pdf ). We hope our project will outperform its ancestor.
-We would like to thank Dr Michał Wrona for inspiring us to create this project. The project is a part of 'SAT Solvers' course at Jagiellonian University.
+
+For this reason, the primary version of our solver is mainly based on MINISAT and its implementation (comprehensively described here: http://www.decision-procedures.org/handouts/MiniSat.pdf ). We hope our project will outperform its ancestor very soon.
+
+We would like to thank Dr Michał Wrona for inspiring us to create this project. The project is a part of 'SAT Solvers' course conducted by Jagiellonian University.
 
 <h3> What has been done? </h3>
 
@@ -22,11 +24,15 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 <h3> More to come </h3>
 
 + VDIDS heuristic for variable decision and its new version based on paper: https://ece.uwaterloo.ca/~vganesh/Publications_files/vg2015-UnderstandingVSIDS-HVC15.pdf
-+ Better management of unassig
 + Better management of learnt clauses
-+ Restarts policy
-+ Solving subproblems with fast, polynomial algorithms (for 2-SAT, Horn-SAT etc.)
++ Smart restarts policy
++ Deriving and solving subproblems with fast, polynomial algorithms (for 2-SAT, Horn-SAT etc.)
 + Modularity - we want our solver to be flexible and consist of disjoint and easy-to-swap modules for different heuristics. Furthermore, solver should be able to evaluate efficiency of heuristics and pick the best one for specific instance.
 + Efficient use of cache
-+ Many small tweaks that improve performance
++ Many small programming tweaks that improve performance
 + Experimenting, experimenting, experimenting...
+
+We test efficiency our solver with benchmarks provided by:
+http://www.cs.ubc.ca/~hoos/SATLIB/benchm.html
+
+At present time, SATan solver outperforms GRASP on big part of benchmarks and CHAFF on a few (and counting!).
