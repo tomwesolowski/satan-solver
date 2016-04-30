@@ -17,7 +17,7 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 + Backtracking (with backjumping) - when everything goes wrong, sometimes the best option is just to give up or give up-up or give up-up-up
 + Simple heuristics for variable decisions - we pick up the most "active" variable, occured in the biggest number of clauses and encountered conflicts
 + Unit propagation in linear time - using two-watched literals with custom little tweaks
-+ Inferred/learnt clauses mechanism - our solver can learn (smart beast!) from its mistake to avoid similar ones in the future
++ Inferred/learnt clauses mechanism - our solver can learn (smart beast!) from its mistake to avoid similar ones in the future by analyzing implication graph and finding causes of encountered conflicts
 + Simplifying clauses - when we're sure how literal has to be assigned, we don't want process it over and over again
 + Verification of returned model - just for testing purposes
 
@@ -29,6 +29,7 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 + Deriving and solving subproblems with fast, polynomial algorithms (for 2-SAT, Horn-SAT etc.)
 + Modularity - we want our solver to be flexible and consist of disjoint and easy-to-swap modules for different heuristics. Furthermore, solver should be able to evaluate efficiency of heuristics and pick the best one for specific instance.
 + Efficient use of cache
++ Much more heuristics coming from papers and our minds
 + Many small programming tweaks that improve performance
 + Experimenting, experimenting, experimenting...
 
