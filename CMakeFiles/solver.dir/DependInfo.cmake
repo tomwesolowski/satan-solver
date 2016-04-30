@@ -4,11 +4,13 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/tomek/Dropbox/solver/src/solver.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/solver.cpp.o"
-  "/home/tomek/Dropbox/solver/src/test.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/test.cpp.o"
-  "/home/tomek/Dropbox/solver/src/types/clause.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/clause.cpp.o"
-  "/home/tomek/Dropbox/solver/src/types/literal.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/literal.cpp.o"
-  "/home/tomek/Dropbox/solver/src/utils/helpers.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/utils/helpers.cpp.o"
+  "/home/tomek/Dropbox/solver/src/Solver.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/Solver.cpp.o"
+  "/home/tomek/Dropbox/solver/src/Test.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/Test.cpp.o"
+  "/home/tomek/Dropbox/solver/src/types/Clause.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/Clause.cpp.o"
+  "/home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o"
+  "/home/tomek/Dropbox/solver/src/types/Literal.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/Literal.cpp.o"
+  "/home/tomek/Dropbox/solver/src/types/VarDatabase.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"
+  "/home/tomek/Dropbox/solver/src/utils/Helpers.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/utils/Helpers.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "Clang")
 

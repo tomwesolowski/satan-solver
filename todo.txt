@@ -2,3 +2,6 @@
 - prosta heura wyboru zmiennych [OK]
   - jesli cos obserwuje, to przypisz odpowiedni znak [OK]
 - wybieraj znak, taki jak przy większości obserwowanych [OK]
+- podczas update'u watcherów, swapuj przez trzeci literał [OK]
+- upraszczaj klauzule na poziomie 0 [OK]
+- 

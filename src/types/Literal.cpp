@@ -1,4 +1,4 @@
-#include "literal.h"
+#include "Literal.h"
 
 Literal::Literal() {
 	sgn = kUndefined;

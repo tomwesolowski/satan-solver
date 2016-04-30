@@ -1,6 +1,8 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
+#include "ClauseDatabase.h"
+#include "VarDatabase.h"
 
 const int DEBUG = 0;
 #define Cerr if(DEBUG) cerr
@@ -10,13 +12,10 @@ class Solver {
 	std::default_random_engine generator_;
 	
 	vector<int> level_;
-  set< pair<int, int> > free_vars_; // <activeness, var>
-  vector<int> activeness_; // number of clauses with literal i
-
+  
   vector< vector<RefClause > > watchers_;
 
   vector<RefClause> reason_;
-  vector<RefClause> assumptions_;
   vector<RefClause> clauses_;
   queue<Literal> prop_queue_; // <var, value>
 
@@ -26,6 +25,10 @@ class Solver {
   int state_ = kUnknownState;
 
  	vector<int> vars_;
+
+  ClauseDatabase clause_db_;
+
+  VarDatabase var_db_;
 
   void InitVars(int num_vars);
 

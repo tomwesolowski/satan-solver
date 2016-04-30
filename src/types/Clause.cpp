@@ -2,11 +2,13 @@
 
 using namespace std;
 
-#include "constants.h"
-#include "helpers.h"
-#include "literal.h"
-#include "clause.h"
-#include "solver.h"
+#include "Constants.h"
+#include "Helpers.h"
+#include "Literal.h"
+#include "Clause.h"
+#include "ClauseDatabase.h"
+#include "VarDatabase.h"
+#include "Solver.h"
 
 RefClause Clause::Create(Solver* solver, vector<Literal>& lits) {
 	static int id = 0; 

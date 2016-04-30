@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
-#include "constants.h"
-#include "literal.h"
-#include "helpers.h"
-#include "clause.h"
-#include "solver.h"
+#include "Constants.h"
+#include "Literal.h"
+#include "Helpers.h"
+#include "Clause.h"
+#include "Solver.h"
 
 using namespace std;
 
 shared_ptr<Clause> NullClause = nullptr;
 
 void Solver::AddToFreeVars(int var) {
-	//Cerr << "add " << var+1 << ":" << activeness_[var] << endl;
-	//activeness_[var] = rand(); //FOR DEBUG
+	//Cerr << "add " << var+1 << ":" << var_db_.activeness_[var] << endl;
+	//var_db_.activeness_[var] = rand(); //FOR DEBUG
 	Assert(!IsVarFree(var), "AddToFreeVars: Trying to add to free vars again");
-	free_vars_.insert({activeness_[var], var});
+	var_db_.free_vars_.insert({var_db_.activeness_[var], var});
 }
 
 void Solver::PrepareFreeVars() {
@@ -27,7 +27,7 @@ void Solver::InitVars(int num_vars) {
 	reason_.resize(num_vars, nullptr);
 	watchers_.resize(2*num_vars);
 	level_.resize(num_vars);
-	activeness_.resize(num_vars, 0);
+	var_db_.activeness_.resize(num_vars, 0);
 	PrepareFreeVars();
 }
 
@@ -50,11 +50,11 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 	for(Literal& lit : lits) {
 		if(IsVarFree(lit.var())) {
 			RemoveFree(lit.var());
-			activeness_[lit.var()] += 50 - lits.size();
+			var_db_.activeness_[lit.var()] += 50 - lits.size();
 			AddToFreeVars(lit.var());
 		}
 		else {
-			activeness_[lit.var()] += 50 - lits.size();
+			var_db_.activeness_[lit.var()] += 50 - lits.size();
 		}
 	}
 
@@ -64,19 +64,6 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 		//cerr << "Learnt size: " << lits.size() << endl;
 		assert(lits.size() > 1 || CurrentDecisionLevel() == 0);
 	}
-
-	//assert(!learnt || lits.size() > 1);
-	//if(learnt && CurrentDecisionLevel() == 0) {
-	/*	for(Literal lit : lits) {
-			Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << " ";
-		}
-		Cerr << "#" << CurrentDecisionLevel() << endl;
-	//}
-
-	for(Literal lit : trail_) {
-		Cerr << lit.var() << ":" << lit.sign() << ":" << level_[lit.var()] << " .. ";
-	}
-	Cerr << endl;*/
 
 	if(lits.size() <= 1) {
 		if(!Enqueue(lits[0])) {
@@ -117,11 +104,7 @@ void Solver::Decide() {
 	// get random free variable
 	Assert(GetNumFree(), "No free vars to decide.");
 
-	//std::uniform_int_distribution<int> randFree(0, GetNumFree()-1);
-	//std::uniform_int_distribution<int> randVal(0, 1);
-	//std::uniform_int_distribution<int> randProb(0, 10);
-	//std::default_random_engine generator;
-	int var_free = free_vars_.rbegin()->second;
+	int var_free = var_db_.free_vars_.rbegin()->second;
 	Literal lit_pos(var_free, kPositive);
 	Literal lit_neg(var_free, kNegative);
 	Literal lit;
@@ -142,7 +125,6 @@ void Solver::Decide() {
 
 	//int idlit = (clause->lits_[1].var() == var_free);
 	//Assert((clause->lits_[idlit].var() == var_free), 
-	//	"Decide: Picked var watch error");
 
 	decision_levels_.push_back(trail_.size());
 	Assert(Enqueue(lit), "Enqueue failed while deciding new var");
@@ -150,10 +132,6 @@ void Solver::Decide() {
 	Cerr << "Decide " << lit.var() << 
 					" val: " << lit.sign() << 
 					"free: " << GetNumFree() << endl;
-
-	//int sum_watchers = 0;
-	//for(int i = 0; i < watchers_.size(); i++) sum_watchers += watchers_[i].size();
-	//Cerr << "sum: " << sum_watchers << endl;
 }
 
 RefClause Solver::Propagate() {
@@ -177,24 +155,17 @@ RefClause Solver::Propagate() {
   		int status = UpdateWatcher(clause, -lit);
 
   		if(status == kUnitClause) {
-  			/*Cerr << "unit! " << clause->id_ << endl;
-  			for(Literal lit : clause->lits_) {
-					Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << " ";
-				}
-				Cerr << endl;*/
+
   			Literal unit = GetUnitLiteral(clause);
 
   			if(!Enqueue(unit, clause)) {
   				Cerr << "and conflict " << unit.var() << " " << GetVarValue(unit.var()) << " " << unit.sign() << " " << clause->lits_.size() << endl;
-  				/*for(Literal lit : trail_) {
-						Cerr << lit.var() << ":" << lit.sign() << ":" << level_[lit.var()] << " .. ";
-					}
-					Cerr << endl;*/
+
   				conflict = clause;
 
   				//todo
   				for(Literal& lit : conflict->lits_) {
-  					activeness_[lit.var()]++;
+  					var_db_.activeness_[lit.var()]++;
   				}
 
   				break;
@@ -255,11 +226,11 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 
   do {
   	reason.clear();
-  	Cerr << ":" << p.var() << " counter: " << counter << " " << (p.var() != -1 ? level_[p.var()] : -1) << endl;
+  	//Cerr << ":" << p.var() << " counter: " << counter << " " << (p.var() != -1 ? level_[p.var()] : -1) << endl;
   	Assert(conflict != nullptr, "Conflict is nullptr");
 
   	assert(p.sign() != kUndefined);
-		// p == conflict.lits_[0]! ???
+
 		if(p.var() >= 0) {
 			Cerr << p.var() << " " << p.sign() << endl;
 			int found = 0;
@@ -296,7 +267,6 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   		assert(trail_.size());
   		p = trail_.back();
   		conflict = reason_[p.var()];
-  		//Cerr << "iter " << iter++ << " var: " << p.var() << " lvl: " << level_[p.var()] << " cur: " << CurrentDecisionLevel() << " conf: " << (conflict != nullptr) << " dec: " << decision_levels_.back() << endl;
   		UnsetVar();
   	}
   	while(!seen[p.var()]);
@@ -452,8 +422,6 @@ int Solver::UpdateWatcher(RefClause clause, Literal lit) {
 		swap(clause->lits_[0], clause->lits_[1]);
 	}
 
-	//Cerr << "update var: " << lit.var() << " sign: " << lit.sign() << " val: " << GetLitValue(lit) << endl;
-
 	Assert(GetLitValue(lit) == kNegative, "UpdateWatcher: updating when lit != negative");
 
 	Assert(lit == clause->lits_[0], 
@@ -472,7 +440,7 @@ int Solver::UpdateWatcher(RefClause clause, Literal lit) {
 		"Cannot hold and release watcher at the same time");
 
 	Assert(__builtin_popcount((status & kUnitClause) + 
-		/*(status & kUnsatisfiableClause) +*/ (status & kNormalClause)) == 1, 
+		(status & kNormalClause)) == 1, 
 		"Status in incorrect");
 
 	if(status & kUnitClause) {
@@ -487,13 +455,13 @@ int Solver::FlipValue(int value) {
 }
 
 void Solver::RemoveFree(int var) {
-	//Cerr << "rem " << var << ":" << activeness_[var] << endl;
+	//Cerr << "rem " << var << ":" << var_db_.activeness_[var] << endl;
 	Assert(IsVarFree(var), "Variable was not free");
-	free_vars_.erase({activeness_[var], var});
+	var_db_.free_vars_.erase({var_db_.activeness_[var], var});
 }
 
 int Solver::GetNumFree() {
-	return free_vars_.size();
+	return var_db_.free_vars_.size();
 }
 
 // FOR DEBUG
@@ -560,7 +528,7 @@ bool Solver::IsVarNegative(int var) { return GetVarValue(var) == kNegative; }
 
 bool Solver::IsVarUndefined(int var) { return GetVarValue(var) == kUndefined; }
 
-bool Solver::IsVarFree(int var) { return free_vars_.count({activeness_[var], var}) == 1; }
+bool Solver::IsVarFree(int var) { return var_db_.free_vars_.count({var_db_.activeness_[var], var}) == 1; }
 
 void Solver::SetSat() { state_ = kSatisfiableState; }
 

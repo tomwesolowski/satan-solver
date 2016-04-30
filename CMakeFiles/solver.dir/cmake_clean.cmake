@@ -1,9 +1,11 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/solver.dir/src/utils/helpers.cpp.o"
-  "CMakeFiles/solver.dir/src/types/literal.cpp.o"
-  "CMakeFiles/solver.dir/src/types/clause.cpp.o"
-  "CMakeFiles/solver.dir/src/solver.cpp.o"
-  "CMakeFiles/solver.dir/src/test.cpp.o"
+  "CMakeFiles/solver.dir/src/utils/Helpers.cpp.o"
+  "CMakeFiles/solver.dir/src/types/Literal.cpp.o"
+  "CMakeFiles/solver.dir/src/types/Clause.cpp.o"
+  "CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o"
+  "CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"
+  "CMakeFiles/solver.dir/src/Solver.cpp.o"
+  "CMakeFiles/solver.dir/src/Test.cpp.o"
   "solver.pdb"
   "solver"
 )

@@ -2,12 +2,12 @@
 
 using namespace std;
 
-#include "constants.h"
-#include "literal.h"
-#include "helpers.h"
-#include "clause.h"
-#include "solver.h"
-#include "parser.h"
+#include "Constants.h"
+#include "Literal.h"
+#include "Helpers.h"
+#include "Clause.h"
+#include "Solver.h"
+#include "Parser.h"
 #include "gtest.h"
 
 int z, n;

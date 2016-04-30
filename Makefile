@@ -114,125 +114,173 @@ solver/fast:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/build
 .PHONY : solver/fast
 
-src/solver.o: src/solver.cpp.o
-.PHONY : src/solver.o
+src/Solver.o: src/Solver.cpp.o
+.PHONY : src/Solver.o
 
 # target to build an object file
-src/solver.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/solver.cpp.o
-.PHONY : src/solver.cpp.o
+src/Solver.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Solver.cpp.o
+.PHONY : src/Solver.cpp.o
 
-src/solver.i: src/solver.cpp.i
-.PHONY : src/solver.i
+src/Solver.i: src/Solver.cpp.i
+.PHONY : src/Solver.i
 
 # target to preprocess a source file
-src/solver.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/solver.cpp.i
-.PHONY : src/solver.cpp.i
+src/Solver.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Solver.cpp.i
+.PHONY : src/Solver.cpp.i
 
-src/solver.s: src/solver.cpp.s
-.PHONY : src/solver.s
+src/Solver.s: src/Solver.cpp.s
+.PHONY : src/Solver.s
 
 # target to generate assembly for a file
-src/solver.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/solver.cpp.s
-.PHONY : src/solver.cpp.s
+src/Solver.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Solver.cpp.s
+.PHONY : src/Solver.cpp.s
 
-src/test.o: src/test.cpp.o
-.PHONY : src/test.o
+src/Test.o: src/Test.cpp.o
+.PHONY : src/Test.o
 
 # target to build an object file
-src/test.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/test.cpp.o
-.PHONY : src/test.cpp.o
+src/Test.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Test.cpp.o
+.PHONY : src/Test.cpp.o
 
-src/test.i: src/test.cpp.i
-.PHONY : src/test.i
+src/Test.i: src/Test.cpp.i
+.PHONY : src/Test.i
 
 # target to preprocess a source file
-src/test.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/test.cpp.i
-.PHONY : src/test.cpp.i
+src/Test.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Test.cpp.i
+.PHONY : src/Test.cpp.i
 
-src/test.s: src/test.cpp.s
-.PHONY : src/test.s
+src/Test.s: src/Test.cpp.s
+.PHONY : src/Test.s
 
 # target to generate assembly for a file
-src/test.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/test.cpp.s
-.PHONY : src/test.cpp.s
+src/Test.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Test.cpp.s
+.PHONY : src/Test.cpp.s
 
-src/types/clause.o: src/types/clause.cpp.o
-.PHONY : src/types/clause.o
+src/types/Clause.o: src/types/Clause.cpp.o
+.PHONY : src/types/Clause.o
 
 # target to build an object file
-src/types/clause.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/clause.cpp.o
-.PHONY : src/types/clause.cpp.o
+src/types/Clause.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Clause.cpp.o
+.PHONY : src/types/Clause.cpp.o
 
-src/types/clause.i: src/types/clause.cpp.i
-.PHONY : src/types/clause.i
+src/types/Clause.i: src/types/Clause.cpp.i
+.PHONY : src/types/Clause.i
 
 # target to preprocess a source file
-src/types/clause.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/clause.cpp.i
-.PHONY : src/types/clause.cpp.i
+src/types/Clause.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Clause.cpp.i
+.PHONY : src/types/Clause.cpp.i
 
-src/types/clause.s: src/types/clause.cpp.s
-.PHONY : src/types/clause.s
+src/types/Clause.s: src/types/Clause.cpp.s
+.PHONY : src/types/Clause.s
 
 # target to generate assembly for a file
-src/types/clause.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/clause.cpp.s
-.PHONY : src/types/clause.cpp.s
+src/types/Clause.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Clause.cpp.s
+.PHONY : src/types/Clause.cpp.s
 
-src/types/literal.o: src/types/literal.cpp.o
-.PHONY : src/types/literal.o
+src/types/ClauseDatabase.o: src/types/ClauseDatabase.cpp.o
+.PHONY : src/types/ClauseDatabase.o
 
 # target to build an object file
-src/types/literal.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/literal.cpp.o
-.PHONY : src/types/literal.cpp.o
+src/types/ClauseDatabase.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
+.PHONY : src/types/ClauseDatabase.cpp.o
 
-src/types/literal.i: src/types/literal.cpp.i
-.PHONY : src/types/literal.i
+src/types/ClauseDatabase.i: src/types/ClauseDatabase.cpp.i
+.PHONY : src/types/ClauseDatabase.i
 
 # target to preprocess a source file
-src/types/literal.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/literal.cpp.i
-.PHONY : src/types/literal.cpp.i
+src/types/ClauseDatabase.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i
+.PHONY : src/types/ClauseDatabase.cpp.i
 
-src/types/literal.s: src/types/literal.cpp.s
-.PHONY : src/types/literal.s
+src/types/ClauseDatabase.s: src/types/ClauseDatabase.cpp.s
+.PHONY : src/types/ClauseDatabase.s
 
 # target to generate assembly for a file
-src/types/literal.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/literal.cpp.s
-.PHONY : src/types/literal.cpp.s
+src/types/ClauseDatabase.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s
+.PHONY : src/types/ClauseDatabase.cpp.s
 
-src/utils/helpers.o: src/utils/helpers.cpp.o
-.PHONY : src/utils/helpers.o
+src/types/Literal.o: src/types/Literal.cpp.o
+.PHONY : src/types/Literal.o
 
 # target to build an object file
-src/utils/helpers.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/helpers.cpp.o
-.PHONY : src/utils/helpers.cpp.o
+src/types/Literal.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Literal.cpp.o
+.PHONY : src/types/Literal.cpp.o
 
-src/utils/helpers.i: src/utils/helpers.cpp.i
-.PHONY : src/utils/helpers.i
+src/types/Literal.i: src/types/Literal.cpp.i
+.PHONY : src/types/Literal.i
 
 # target to preprocess a source file
-src/utils/helpers.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/helpers.cpp.i
-.PHONY : src/utils/helpers.cpp.i
+src/types/Literal.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Literal.cpp.i
+.PHONY : src/types/Literal.cpp.i
 
-src/utils/helpers.s: src/utils/helpers.cpp.s
-.PHONY : src/utils/helpers.s
+src/types/Literal.s: src/types/Literal.cpp.s
+.PHONY : src/types/Literal.s
 
 # target to generate assembly for a file
-src/utils/helpers.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/helpers.cpp.s
-.PHONY : src/utils/helpers.cpp.s
+src/types/Literal.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Literal.cpp.s
+.PHONY : src/types/Literal.cpp.s
+
+src/types/VarDatabase.o: src/types/VarDatabase.cpp.o
+.PHONY : src/types/VarDatabase.o
+
+# target to build an object file
+src/types/VarDatabase.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
+.PHONY : src/types/VarDatabase.cpp.o
+
+src/types/VarDatabase.i: src/types/VarDatabase.cpp.i
+.PHONY : src/types/VarDatabase.i
+
+# target to preprocess a source file
+src/types/VarDatabase.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/VarDatabase.cpp.i
+.PHONY : src/types/VarDatabase.cpp.i
+
+src/types/VarDatabase.s: src/types/VarDatabase.cpp.s
+.PHONY : src/types/VarDatabase.s
+
+# target to generate assembly for a file
+src/types/VarDatabase.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/VarDatabase.cpp.s
+.PHONY : src/types/VarDatabase.cpp.s
+
+src/utils/Helpers.o: src/utils/Helpers.cpp.o
+.PHONY : src/utils/Helpers.o
+
+# target to build an object file
+src/utils/Helpers.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
+.PHONY : src/utils/Helpers.cpp.o
+
+src/utils/Helpers.i: src/utils/Helpers.cpp.i
+.PHONY : src/utils/Helpers.i
+
+# target to preprocess a source file
+src/utils/Helpers.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Helpers.cpp.i
+.PHONY : src/utils/Helpers.cpp.i
+
+src/utils/Helpers.s: src/utils/Helpers.cpp.s
+.PHONY : src/utils/Helpers.s
+
+# target to generate assembly for a file
+src/utils/Helpers.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Helpers.cpp.s
+.PHONY : src/utils/Helpers.cpp.s
 
 # Help Target
 help:
@@ -243,21 +291,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... solver"
-	@echo "... src/solver.o"
-	@echo "... src/solver.i"
-	@echo "... src/solver.s"
-	@echo "... src/test.o"
-	@echo "... src/test.i"
-	@echo "... src/test.s"
-	@echo "... src/types/clause.o"
-	@echo "... src/types/clause.i"
-	@echo "... src/types/clause.s"
-	@echo "... src/types/literal.o"
-	@echo "... src/types/literal.i"
-	@echo "... src/types/literal.s"
-	@echo "... src/utils/helpers.o"
-	@echo "... src/utils/helpers.i"
-	@echo "... src/utils/helpers.s"
+	@echo "... src/Solver.o"
+	@echo "... src/Solver.i"
+	@echo "... src/Solver.s"
+	@echo "... src/Test.o"
+	@echo "... src/Test.i"
+	@echo "... src/Test.s"
+	@echo "... src/types/Clause.o"
+	@echo "... src/types/Clause.i"
+	@echo "... src/types/Clause.s"
+	@echo "... src/types/ClauseDatabase.o"
+	@echo "... src/types/ClauseDatabase.i"
+	@echo "... src/types/ClauseDatabase.s"
+	@echo "... src/types/Literal.o"
+	@echo "... src/types/Literal.i"
+	@echo "... src/types/Literal.s"
+	@echo "... src/types/VarDatabase.o"
+	@echo "... src/types/VarDatabase.i"
+	@echo "... src/types/VarDatabase.s"
+	@echo "... src/utils/Helpers.o"
+	@echo "... src/utils/Helpers.i"
+	@echo "... src/utils/Helpers.s"
 .PHONY : help
 
 

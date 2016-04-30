@@ -1,7 +1,7 @@
 #ifndef LITERAL_H
 #define LITERAL_H
 
-#include "constants.h"
+#include "Constants.h"
 
 struct Literal {
   int varid;

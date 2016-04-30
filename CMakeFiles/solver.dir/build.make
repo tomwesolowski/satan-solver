@@ -52,137 +52,187 @@ include CMakeFiles/solver.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/solver.dir/flags.make
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/utils/helpers.cpp.o: src/utils/helpers.cpp
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.o: src/utils/Helpers.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/utils/helpers.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/utils/helpers.cpp.o -c /home/tomek/Dropbox/solver/src/utils/helpers.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/utils/Helpers.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/utils/Helpers.cpp.o -c /home/tomek/Dropbox/solver/src/utils/Helpers.cpp
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/utils/helpers.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/utils/helpers.cpp > CMakeFiles/solver.dir/src/utils/helpers.cpp.i
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/utils/Helpers.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/utils/Helpers.cpp > CMakeFiles/solver.dir/src/utils/Helpers.cpp.i
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/utils/helpers.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/utils/helpers.cpp -o CMakeFiles/solver.dir/src/utils/helpers.cpp.s
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/utils/Helpers.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/utils/Helpers.cpp -o CMakeFiles/solver.dir/src/utils/Helpers.cpp.s
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/utils/helpers.cpp.o.requires
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.requires
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.o.provides: CMakeFiles/solver.dir/src/utils/helpers.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/helpers.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/utils/helpers.cpp.o.provides
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.provides: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.provides
 
-CMakeFiles/solver.dir/src/utils/helpers.cpp.o.provides.build: CMakeFiles/solver.dir/src/utils/helpers.cpp.o
+CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.provides.build: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
 
-CMakeFiles/solver.dir/src/types/literal.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/types/literal.cpp.o: src/types/literal.cpp
+CMakeFiles/solver.dir/src/types/Literal.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Literal.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/literal.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/literal.cpp.o -c /home/tomek/Dropbox/solver/src/types/literal.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/Literal.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/Literal.cpp.o -c /home/tomek/Dropbox/solver/src/types/Literal.cpp
 
-CMakeFiles/solver.dir/src/types/literal.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/literal.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/literal.cpp > CMakeFiles/solver.dir/src/types/literal.cpp.i
+CMakeFiles/solver.dir/src/types/Literal.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/Literal.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/Literal.cpp > CMakeFiles/solver.dir/src/types/Literal.cpp.i
 
-CMakeFiles/solver.dir/src/types/literal.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/literal.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/literal.cpp -o CMakeFiles/solver.dir/src/types/literal.cpp.s
+CMakeFiles/solver.dir/src/types/Literal.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/Literal.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/Literal.cpp -o CMakeFiles/solver.dir/src/types/Literal.cpp.s
 
-CMakeFiles/solver.dir/src/types/literal.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/types/literal.cpp.o.requires
+CMakeFiles/solver.dir/src/types/Literal.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/types/Literal.cpp.o.requires
 
-CMakeFiles/solver.dir/src/types/literal.cpp.o.provides: CMakeFiles/solver.dir/src/types/literal.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/literal.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/types/literal.cpp.o.provides
+CMakeFiles/solver.dir/src/types/Literal.cpp.o.provides: CMakeFiles/solver.dir/src/types/Literal.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Literal.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/types/Literal.cpp.o.provides
 
-CMakeFiles/solver.dir/src/types/literal.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/literal.cpp.o
+CMakeFiles/solver.dir/src/types/Literal.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/Literal.cpp.o
 
-CMakeFiles/solver.dir/src/types/clause.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/types/clause.cpp.o: src/types/clause.cpp
+CMakeFiles/solver.dir/src/types/Clause.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/types/Clause.cpp.o: src/types/Clause.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/clause.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/clause.cpp.o -c /home/tomek/Dropbox/solver/src/types/clause.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/Clause.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/Clause.cpp.o -c /home/tomek/Dropbox/solver/src/types/Clause.cpp
 
-CMakeFiles/solver.dir/src/types/clause.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/clause.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/clause.cpp > CMakeFiles/solver.dir/src/types/clause.cpp.i
+CMakeFiles/solver.dir/src/types/Clause.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/Clause.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/Clause.cpp > CMakeFiles/solver.dir/src/types/Clause.cpp.i
 
-CMakeFiles/solver.dir/src/types/clause.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/clause.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/clause.cpp -o CMakeFiles/solver.dir/src/types/clause.cpp.s
+CMakeFiles/solver.dir/src/types/Clause.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/Clause.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/Clause.cpp -o CMakeFiles/solver.dir/src/types/Clause.cpp.s
 
-CMakeFiles/solver.dir/src/types/clause.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/types/clause.cpp.o.requires
+CMakeFiles/solver.dir/src/types/Clause.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/types/Clause.cpp.o.requires
 
-CMakeFiles/solver.dir/src/types/clause.cpp.o.provides: CMakeFiles/solver.dir/src/types/clause.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/clause.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/types/clause.cpp.o.provides
+CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides: CMakeFiles/solver.dir/src/types/Clause.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides
 
-CMakeFiles/solver.dir/src/types/clause.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/clause.cpp.o
+CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/Clause.cpp.o
 
-CMakeFiles/solver.dir/src/solver.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/solver.cpp.o: src/solver.cpp
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o: src/types/ClauseDatabase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/solver.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/solver.cpp.o -c /home/tomek/Dropbox/solver/src/solver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o -c /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp
 
-CMakeFiles/solver.dir/src/solver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/solver.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/solver.cpp > CMakeFiles/solver.dir/src/solver.cpp.i
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp > CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i
 
-CMakeFiles/solver.dir/src/solver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/solver.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/solver.cpp -o CMakeFiles/solver.dir/src/solver.cpp.s
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp -o CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s
 
-CMakeFiles/solver.dir/src/solver.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/solver.cpp.o.requires
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
 
-CMakeFiles/solver.dir/src/solver.cpp.o.provides: CMakeFiles/solver.dir/src/solver.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/solver.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/solver.cpp.o.provides
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides
 
-CMakeFiles/solver.dir/src/solver.cpp.o.provides.build: CMakeFiles/solver.dir/src/solver.cpp.o
+CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
 
-CMakeFiles/solver.dir/src/test.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/test.cpp.o: src/test.cpp
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/test.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/test.cpp.o -c /home/tomek/Dropbox/solver/src/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o -c /home/tomek/Dropbox/solver/src/types/VarDatabase.cpp
 
-CMakeFiles/solver.dir/src/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/test.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/test.cpp > CMakeFiles/solver.dir/src/test.cpp.i
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/VarDatabase.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/VarDatabase.cpp > CMakeFiles/solver.dir/src/types/VarDatabase.cpp.i
 
-CMakeFiles/solver.dir/src/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/test.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/test.cpp -o CMakeFiles/solver.dir/src/test.cpp.s
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/VarDatabase.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/VarDatabase.cpp -o CMakeFiles/solver.dir/src/types/VarDatabase.cpp.s
 
-CMakeFiles/solver.dir/src/test.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/test.cpp.o.requires
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.requires
 
-CMakeFiles/solver.dir/src/test.cpp.o.provides: CMakeFiles/solver.dir/src/test.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/test.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/test.cpp.o.provides
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.provides: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.provides
 
-CMakeFiles/solver.dir/src/test.cpp.o.provides.build: CMakeFiles/solver.dir/src/test.cpp.o
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
+
+CMakeFiles/solver.dir/src/Solver.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/Solver.cpp.o: src/Solver.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/Solver.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/Solver.cpp.o -c /home/tomek/Dropbox/solver/src/Solver.cpp
+
+CMakeFiles/solver.dir/src/Solver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/Solver.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/Solver.cpp > CMakeFiles/solver.dir/src/Solver.cpp.i
+
+CMakeFiles/solver.dir/src/Solver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/Solver.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/Solver.cpp -o CMakeFiles/solver.dir/src/Solver.cpp.s
+
+CMakeFiles/solver.dir/src/Solver.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/Solver.cpp.o.requires
+
+CMakeFiles/solver.dir/src/Solver.cpp.o.provides: CMakeFiles/solver.dir/src/Solver.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Solver.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/Solver.cpp.o.provides
+
+CMakeFiles/solver.dir/src/Solver.cpp.o.provides.build: CMakeFiles/solver.dir/src/Solver.cpp.o
+
+CMakeFiles/solver.dir/src/Test.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/Test.cpp.o: src/Test.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/Test.cpp.o"
+	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/Test.cpp.o -c /home/tomek/Dropbox/solver/src/Test.cpp
+
+CMakeFiles/solver.dir/src/Test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/Test.cpp.i"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/Test.cpp > CMakeFiles/solver.dir/src/Test.cpp.i
+
+CMakeFiles/solver.dir/src/Test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/Test.cpp.s"
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/Test.cpp -o CMakeFiles/solver.dir/src/Test.cpp.s
+
+CMakeFiles/solver.dir/src/Test.cpp.o.requires:
+.PHONY : CMakeFiles/solver.dir/src/Test.cpp.o.requires
+
+CMakeFiles/solver.dir/src/Test.cpp.o.provides: CMakeFiles/solver.dir/src/Test.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/Test.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/Test.cpp.o.provides
+
+CMakeFiles/solver.dir/src/Test.cpp.o.provides.build: CMakeFiles/solver.dir/src/Test.cpp.o
 
 # Object files for target solver
 solver_OBJECTS = \
-"CMakeFiles/solver.dir/src/utils/helpers.cpp.o" \
-"CMakeFiles/solver.dir/src/types/literal.cpp.o" \
-"CMakeFiles/solver.dir/src/types/clause.cpp.o" \
-"CMakeFiles/solver.dir/src/solver.cpp.o" \
-"CMakeFiles/solver.dir/src/test.cpp.o"
+"CMakeFiles/solver.dir/src/utils/Helpers.cpp.o" \
+"CMakeFiles/solver.dir/src/types/Literal.cpp.o" \
+"CMakeFiles/solver.dir/src/types/Clause.cpp.o" \
+"CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o" \
+"CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o" \
+"CMakeFiles/solver.dir/src/Solver.cpp.o" \
+"CMakeFiles/solver.dir/src/Test.cpp.o"
 
 # External object files for target solver
 solver_EXTERNAL_OBJECTS =
 
-solver: CMakeFiles/solver.dir/src/utils/helpers.cpp.o
-solver: CMakeFiles/solver.dir/src/types/literal.cpp.o
-solver: CMakeFiles/solver.dir/src/types/clause.cpp.o
-solver: CMakeFiles/solver.dir/src/solver.cpp.o
-solver: CMakeFiles/solver.dir/src/test.cpp.o
+solver: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
+solver: CMakeFiles/solver.dir/src/types/Literal.cpp.o
+solver: CMakeFiles/solver.dir/src/types/Clause.cpp.o
+solver: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
+solver: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
+solver: CMakeFiles/solver.dir/src/Solver.cpp.o
+solver: CMakeFiles/solver.dir/src/Test.cpp.o
 solver: CMakeFiles/solver.dir/build.make
 solver: CMakeFiles/solver.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable solver"
@@ -192,11 +242,13 @@ solver: CMakeFiles/solver.dir/link.txt
 CMakeFiles/solver.dir/build: solver
 .PHONY : CMakeFiles/solver.dir/build
 
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/utils/helpers.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/literal.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/clause.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/solver.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/test.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/Literal.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/Clause.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/Solver.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/Test.cpp.o.requires
 .PHONY : CMakeFiles/solver.dir/requires
 
 CMakeFiles/solver.dir/clean:
