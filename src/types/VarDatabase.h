@@ -23,6 +23,8 @@ public:
   void BumpActivity(Solver* solver, int var, int value = 1);
 
   bool IsVarFree(Solver* solver, int var);
+
+ 	Literal GetNext(Solver* solver);
 };
 
 #endif

@@ -9,6 +9,25 @@ using namespace std;
 #include "VarDatabase.h"
 #include "Solver.h"
 
+Literal VarDatabase::GetNext(Solver* solver) {
+	int var_free = free_vars_.rbegin()->second;
+	Literal lit_pos(var_free, kPositive);
+	Literal lit_neg(var_free, kNegative);
+	Literal lit;
+
+	if(solver->watchers_[lit_neg.index()].size() > 
+			solver->watchers_[lit_pos.index()].size()) {
+		lit = lit_pos;
+	}
+	else if(solver->watchers_[lit_pos.index()].size()) {
+		lit = lit_neg;
+	}
+	else {
+		lit = Literal(var_free, kPositive);
+	}
+	return lit;
+}
+
 void VarDatabase::AddToFreeVars(Solver* solver, int var) {
 	//var_db_.activeness_[var] = rand(); //FOR DEBUG
 	Assert(!IsVarFree(solver, var), "AddToFreeVars: Trying to add to free vars again");

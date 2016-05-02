@@ -83,25 +83,7 @@ void Solver::Decide() {
 	// get random free variable
 	Assert(GetNumFree(), "No free vars to decide.");
 
-	int var_free = var_db_.free_vars_.rbegin()->second;
-	Literal lit_pos(var_free, kPositive);
-	Literal lit_neg(var_free, kNegative);
-	Literal lit;
-	RefClause clause;
-
-	if(watchers_[lit_neg.index()].size() > 
-			watchers_[lit_pos.index()].size()) {
-		clause = watchers_[lit_neg.index()][0];
-		lit = lit_pos;
-	}
-	else if(watchers_[lit_pos.index()].size()) {
-		clause = watchers_[lit_pos.index()][0];
-		lit = lit_neg;
-	}
-	else {
-		lit = Literal(var_free, kPositive);
-	}
-
+	Literal lit = var_db_.GetNext(this);
 	//int idlit = (clause->lits_[1].var() == var_free);
 	//Assert((clause->lits_[idlit].var() == var_free), 
 
@@ -432,7 +414,6 @@ int Solver::FlipValue(int value) {
 	Assert(value != kUndefined, "Trying to flip undefined value");
 	return (value == kPositive ? kNegative : kPositive);
 }
-
 
 int Solver::GetNumFree() {
 	return var_db_.free_vars_.size();
