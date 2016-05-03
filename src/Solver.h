@@ -1,7 +1,6 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
-#include "ClauseDatabase.h"
 #include "VarDatabase.h"
 
 const int DEBUG = 0;
@@ -9,6 +8,14 @@ const int DEBUG = 0;
 
 class Solver {
  public:
+
+  int kLearntLimit;
+  int kConflictLimit;
+
+  int num_learnt_ = 0;
+  int num_conflicts_ = 0;
+  int num_fixed_clauses = 0;
+
 	std::default_random_engine generator_;
 	
 	vector<int> level_;
@@ -26,7 +33,7 @@ class Solver {
 
  	vector<int> vars_;
 
-  ClauseDatabase clause_db_;
+  map<RefClause, int> activity_;
 
   VarDatabase var_db_;
 
@@ -40,12 +47,14 @@ class Solver {
 
   RefClause Propagate();
 
+  void Reduce();
+
   //level - the latest level to NOT be erased
   bool Backtrack(int level);
 
   int Analyze(RefClause conflict, vector<Literal>& learnt_clause);
 
-  bool Search();
+  int Search();
 
   Literal RemoveFromPropagateQueue();
 
@@ -65,9 +74,15 @@ class Solver {
 
   void Simplify();
 
+  void ClearPropagationQueue();
+
   int GetNumFree();
 
   int CurrentDecisionLevel();
+
+  struct CompActivity;
+
+  void SortClausesByActivity(int a, int b);
 
   bool IsUnitClause(RefClause clause);
 

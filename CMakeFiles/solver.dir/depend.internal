@@ -3,7 +3,6 @@
 
 CMakeFiles/solver.dir/src/Solver.cpp.o
  ./src/types/Clause.h
- ./src/types/ClauseDatabase.h
  ./src/types/Constants.h
  ./src/types/Literal.h
  ./src/types/VarDatabase.h
@@ -12,7 +11,6 @@ CMakeFiles/solver.dir/src/Solver.cpp.o
  /home/tomek/Dropbox/solver/src/Solver.h
 CMakeFiles/solver.dir/src/Test.cpp.o
  ./src/types/Clause.h
- ./src/types/ClauseDatabase.h
  ./src/types/Constants.h
  ./src/types/Literal.h
  ./src/types/VarDatabase.h
@@ -47,20 +45,15 @@ CMakeFiles/solver.dir/src/types/Clause.cpp.o
  ./src/utils/Helpers.h
  /home/tomek/Dropbox/solver/src/types/Clause.cpp
  /home/tomek/Dropbox/solver/src/types/Clause.h
- /home/tomek/Dropbox/solver/src/types/ClauseDatabase.h
  /home/tomek/Dropbox/solver/src/types/Constants.h
  /home/tomek/Dropbox/solver/src/types/Literal.h
  /home/tomek/Dropbox/solver/src/types/VarDatabase.h
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
- /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp
- /home/tomek/Dropbox/solver/src/types/ClauseDatabase.h
 CMakeFiles/solver.dir/src/types/Literal.cpp.o
  /home/tomek/Dropbox/solver/src/types/Constants.h
  /home/tomek/Dropbox/solver/src/types/Literal.cpp
  /home/tomek/Dropbox/solver/src/types/Literal.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
  ./src/Solver.h
- ./src/types/ClauseDatabase.h
  ./src/utils/Helpers.h
  /home/tomek/Dropbox/solver/src/types/Clause.h
  /home/tomek/Dropbox/solver/src/types/Constants.h

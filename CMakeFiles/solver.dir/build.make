@@ -121,32 +121,9 @@ CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides: CMakeFiles/solver.dir/src
 
 CMakeFiles/solver.dir/src/types/Clause.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/Clause.cpp.o
 
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o: src/types/ClauseDatabase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o"
-	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o -c /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp
-
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp > CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i
-
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp -o CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s
-
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires:
-.PHONY : CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
-
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides
-
-CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.provides.build: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
-
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: CMakeFiles/solver.dir/flags.make
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"
 	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o -c /home/tomek/Dropbox/solver/src/types/VarDatabase.cpp
 
@@ -169,7 +146,7 @@ CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.provides.build: CMakeFiles/sol
 
 CMakeFiles/solver.dir/src/Solver.cpp.o: CMakeFiles/solver.dir/flags.make
 CMakeFiles/solver.dir/src/Solver.cpp.o: src/Solver.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/Solver.cpp.o"
 	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/Solver.cpp.o -c /home/tomek/Dropbox/solver/src/Solver.cpp
 
@@ -192,7 +169,7 @@ CMakeFiles/solver.dir/src/Solver.cpp.o.provides.build: CMakeFiles/solver.dir/src
 
 CMakeFiles/solver.dir/src/Test.cpp.o: CMakeFiles/solver.dir/flags.make
 CMakeFiles/solver.dir/src/Test.cpp.o: src/Test.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/tomek/Dropbox/solver/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/solver.dir/src/Test.cpp.o"
 	/usr/bin/clang++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/Test.cpp.o -c /home/tomek/Dropbox/solver/src/Test.cpp
 
@@ -218,7 +195,6 @@ solver_OBJECTS = \
 "CMakeFiles/solver.dir/src/utils/Helpers.cpp.o" \
 "CMakeFiles/solver.dir/src/types/Literal.cpp.o" \
 "CMakeFiles/solver.dir/src/types/Clause.cpp.o" \
-"CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o" \
 "CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o" \
 "CMakeFiles/solver.dir/src/Solver.cpp.o" \
 "CMakeFiles/solver.dir/src/Test.cpp.o"
@@ -229,7 +205,6 @@ solver_EXTERNAL_OBJECTS =
 solver: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
 solver: CMakeFiles/solver.dir/src/types/Literal.cpp.o
 solver: CMakeFiles/solver.dir/src/types/Clause.cpp.o
-solver: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
 solver: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
 solver: CMakeFiles/solver.dir/src/Solver.cpp.o
 solver: CMakeFiles/solver.dir/src/Test.cpp.o
@@ -245,7 +220,6 @@ CMakeFiles/solver.dir/build: solver
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/utils/Helpers.cpp.o.requires
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/Literal.cpp.o.requires
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/Clause.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o.requires
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o.requires
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/Solver.cpp.o.requires
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/Test.cpp.o.requires

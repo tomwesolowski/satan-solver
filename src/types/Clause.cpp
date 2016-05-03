@@ -6,7 +6,6 @@ using namespace std;
 #include "Helpers.h"
 #include "Literal.h"
 #include "Clause.h"
-#include "ClauseDatabase.h"
 #include "VarDatabase.h"
 #include "Solver.h"
 
@@ -18,6 +17,10 @@ RefClause Clause::Create(Solver* solver, vector<Literal>& lits) {
 Clause::Clause(vector<Literal>& lits, int id) {
 	id_ = id;
 	lits_ = lits;
+}
+
+bool Clause::locked(Solver* solver) {
+	return solver->reason_[lits_[1].var()].get() == this; 
 }
 
 // new watcher always at index 0

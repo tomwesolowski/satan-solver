@@ -10,7 +10,7 @@ public:
 	int num_vars_;
 
 	set< pair<int, int> > free_vars_; // <activeness, var>
-  vector<int> activeness_; // number of clauses with literal i
+  vector<int> activity_; // number of clauses with literal i
 
   void Init(Solver* solver);
 

@@ -9,6 +9,62 @@ using namespace std;
 
 shared_ptr<Clause> NullClause = nullptr;
 
+bool Solver::Solve() {
+	srand(time(NULL));
+
+	kLearntLimit = clauses_.size();
+	kConflictLimit = 450;
+
+	int status;
+	do {
+		num_fixed_clauses = clauses_.size();
+		num_conflicts_ = 0;
+		Backtrack(0);
+		//cerr << "@";
+		cerr << "_";
+		kLearntLimit *= 1.8;
+		kConflictLimit *= 1.5;
+		status = Search();
+	}
+	while(status == kForceRestart);
+	state_ = status;
+
+	cerr << "clauses: " << clauses_.size() << " learnt: " << num_learnt_ << " conf: " << num_conflicts_ << endl;
+  return IsSat();
+}
+
+int Solver::Search() {
+  while (IsUnsolved()) {
+  	//Cerr << clauses_.size() << endl;
+    RefClause conflict = Propagate();
+    if (conflict == NullClause) {
+      if(!GetNumFree()) {
+      	return kSatisfiableState;
+      }
+      if(++num_conflicts_ > kConflictLimit) {
+      	return kForceRestart;
+      }
+      if(CurrentDecisionLevel() == 0) {
+    		Simplify();
+    	}
+    	Reduce();
+      Decide();
+    } else {
+    	if(CurrentDecisionLevel() <= 0) {
+    		return kUnsatisfiableState;
+    	}
+      // conflict!
+		  ClearPropagationQueue();
+
+      vector<Literal> learnt_clause;
+      int level = Analyze(conflict, learnt_clause);
+      Backtrack(level);
+      assert(AddClause(learnt_clause, true));
+    }
+  }
+  Assert(false, "Solved instance has not been caught.");
+  return kUnsatisfiableState;
+}
 
 void Solver::InitVars(int num_vars) { 
 	vars_.resize(num_vars, kUndefined);
@@ -38,11 +94,9 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 	}
 
 	assert(lits.size() > 0);
+	assert(!learnt || lits.size() > 1 || CurrentDecisionLevel() == 0);
 
-	if(learnt) {
-		//cerr << "Learnt size: " << lits.size() << endl;
-		assert(lits.size() > 1 || CurrentDecisionLevel() == 0);
-	}
+	num_learnt_ += learnt;
 
 	if(lits.size() <= 1) {
 		if(!Enqueue(lits[0])) {
@@ -84,8 +138,6 @@ void Solver::Decide() {
 	Assert(GetNumFree(), "No free vars to decide.");
 
 	Literal lit = var_db_.GetNext(this);
-	//int idlit = (clause->lits_[1].var() == var_free);
-	//Assert((clause->lits_[idlit].var() == var_free), 
 
 	decision_levels_.push_back(trail_.size());
 	Assert(Enqueue(lit), "Enqueue failed while deciding new var");
@@ -109,9 +161,12 @@ RefClause Solver::Propagate() {
   		"Propagated var is undefined");
 
   	while(watchers.size()) {
-
   		RefClause clause = watchers.back();
   		watchers.pop_back();
+
+  		if(!clause->active) {
+  			continue;
+  		}
 
   		int status = UpdateWatcher(clause, -lit);
 
@@ -128,7 +183,6 @@ RefClause Solver::Propagate() {
   				for(Literal& lit : conflict->lits_) {
   					var_db_.BumpActivity(this, lit.var());
   				}
-
   				break;
   			}
   		}
@@ -138,7 +192,10 @@ RefClause Solver::Propagate() {
   	if(conflict != nullptr) {
 	  	//add remaining watching clauses
 	  	for(RefClause rem_clause: watchers) {
-				watchers_[lit.index()].push_back(rem_clause);
+	  		if(rem_clause->active) {
+	  			watchers_[lit.index()].push_back(rem_clause);	
+	  		}
+				
 			}
 	  	return conflict;
 	  }
@@ -152,9 +209,7 @@ RefClause Solver::Propagate() {
 //level - the latest level to NOT be erased
 bool Solver::Backtrack(int level) {
   // todo
-
   Cerr << "Backtrack lvl: " << level << endl;
-
   Cerr << decision_levels_.back() << " " << trail_.size() << endl;
 
   assert(level >= 0);
@@ -189,8 +244,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   	reason.clear();
   	//Cerr << ":" << p.var() << " counter: " << counter << " " << (p.var() != -1 ? level_[p.var()] : -1) << endl;
   	Assert(conflict != nullptr, "Conflict is nullptr");
-
-  	assert(p.sign() != kUndefined);
+  	Assert(p.sign() != kUndefined, "p is undefined");
 
 		if(p.var() >= 0) {
 			Cerr << p.var() << " " << p.sign() << endl;
@@ -201,6 +255,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 			}
 			Assert(found, "p literal not found in conflict");
 		}
+
 		for(Literal& lit : conflict->lits_) {
 			if(lit.var() != p.var()) {
 				Assert(GetLitValue(lit) == kNegative, "Reason literal is not negative");
@@ -211,7 +266,6 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   	for(Literal& lit : reason) {
   		Cerr << lit.var() << " " << lit.sign() << " " << (reason_[lit.var()] != nullptr) << "lvl: " << level_[lit.var()] << endl;
   		int var_level = level_[lit.var()];
-  		//Assert(GetLitValue(lit) != kUndefined, "Reason lit is undefined");
   		if(!seen[lit.var()]) {
   			seen[lit.var()] = 1;
   			if(var_level == currentLevel) {
@@ -251,37 +305,6 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 	return max_level;
 }
 
-bool Solver::Search() {
-  while (IsUnsolved()) {
-  	//Cerr << clauses_.size() << endl;
-    RefClause conflict = Propagate();
-    if (conflict == NullClause) {
-      if(!GetNumFree()) {
-      	return true;
-      }
-      if(CurrentDecisionLevel() == 0) {
-    		Simplify();
-    	}
-      Decide();
-    } else {
-    	if(CurrentDecisionLevel() <= 0) {
-    		return false;
-    	}
-      // conflict!
-		  while(prop_queue_.size()) {
-		  	RemoveFromPropagateQueue();
-		  }
-
-      vector<Literal> learnt_clause;
-      int level = Analyze(conflict, learnt_clause);
-      Backtrack(level);
-      assert(AddClause(learnt_clause, true));
-    }
-  }
-  Assert(false, "Solved instance has not been caught.");
-  return true;
-}
-
 bool Solver::Enqueue(Literal lit, RefClause from) {
 	Assert(lit.sign() != kUndefined, "Enqueuing undefined var.");
 	Cerr << "enqueue " << lit.var() << " " << lit.sign() << endl;
@@ -291,6 +314,8 @@ bool Solver::Enqueue(Literal lit, RefClause from) {
 		}
 		return true;
 	}
+
+	// enqueuing...
 	var_db_.RemoveFree(this, lit.var());
 	trail_.push_back(lit);
 	vars_[lit.var()] = lit.sign(); 
@@ -334,49 +359,6 @@ void Solver::Simplify() {
 	}
 }
 
-void Solver::UnsetVar() { 
-	int var = trail_.back().var();
-	Assert(vars_[var] != kUndefined, "Un-assigning non-undefined var.");
-	
-	var_db_.AddToFreeVars(this, var);
-	vars_[var] = kUndefined; 
-	reason_[var] = nullptr;
-	level_[var] = -1;
-	trail_.pop_back();
-}
-
-
-Literal Solver::RemoveFromPropagateQueue() {
-	Assert(prop_queue_.size(), "Trying to pop from empty prop queue.");
-	Literal lit = prop_queue_.front();
-	prop_queue_.pop();
-	return lit;
-}
-
-bool Solver::Verify(bool solvable) {
-	if(IsUnsat()) {
-		Assert(!solvable, "Assignment not found to solvable instance");
-		return true;
-	}
-	Assert(solvable, "Assignment found but it's not solvable :D");
-	for(RefClause clause : clauses_) {
-		bool satisfied = false;
-		for(Literal& lit : clause->lits_) {
-  		if(GetLitValue(lit) == kPositive) {
-  			satisfied = true;
-  		}
-  		Assert(GetLitValue(lit) != kUndefined, "Variable has not been assigned.");
-  	}
-  	Assert(satisfied, "Clause is not satisfied");
-	}
-	return true;
-}
-
-bool Solver::Solve() {
-	state_ = (Search() ? kSatisfiableState : kUnsatisfiableState);
-  return IsSat();
-}
-
 int Solver::UpdateWatcher(RefClause clause, Literal lit) {
 	//temporrary check only var, because of flipped values
 	if(lit == clause->lits_[1]) {
@@ -408,6 +390,134 @@ int Solver::UpdateWatcher(RefClause clause, Literal lit) {
 		return kUnitClause;
 	}
 	return kNormalClause;
+}
+
+void Solver::UnsetVar() { 
+	int var = trail_.back().var();
+	Assert(vars_[var] != kUndefined, "Un-assigning non-undefined var.");
+	
+	var_db_.AddToFreeVars(this, var);
+	vars_[var] = kUndefined; 
+	reason_[var] = nullptr;
+	level_[var] = -1;
+	trail_.pop_back();
+}
+
+
+Literal Solver::RemoveFromPropagateQueue() {
+	Assert(prop_queue_.size(), "Trying to pop from empty prop queue.");
+	Literal lit = prop_queue_.front();
+	prop_queue_.pop();
+	return lit;
+}
+
+void Solver::ClearPropagationQueue() {
+	while(prop_queue_.size()) {
+  	RemoveFromPropagateQueue();
+  }
+}
+
+struct Solver::CompActivity {
+	Solver* solver_;
+
+	CompActivity(Solver* solver) :
+		solver_(solver) {}
+
+	bool operator() (const RefClause& a, const RefClause& b) const {
+		assert(a.get() != nullptr);
+		assert(b.get() != nullptr);
+		//cerr << ">" << (b.get() != nullptr) << endl;
+		if(a->learnt < b->learnt) {
+			return true;
+		}
+		if(a->locked(solver_) > b->locked(solver_)) {
+			return true;
+		}
+		return solver_->activity_[a] > solver_->activity_[b];
+	}
+};
+
+/*
+void Solver::SortClausesByActivity() {
+	//sort(clauses_.begin(), clauses_.end(), CompActivity(this));
+	for(int i = 0; i < clauses_.size(); i++) {
+		for(int j = i; j > 0; j--) {
+			RefClause a = clauses_[j-1];
+			RefClause b = clauses_[j];
+			if(a->learnt > b->learnt || activity_[a] > activity_[b]) {
+				swap(clauses_[j-1], clauses_[j]);
+			}
+			else break;
+		}
+	}
+}
+*/
+
+void Solver::SortClausesByActivity(int a, int b) {
+	if(a > b) {
+		cerr << a << " " << b << endl;
+		assert(false);
+	}
+	if(a == b) {
+		return;
+	}
+	int mid = (a+b)/2;
+
+	SortClausesByActivity(a, mid);
+	SortClausesByActivity(mid+1, b);
+
+	int i = a, j = mid+1, d = 0;
+	vector<RefClause> tmp(b-a+1);
+
+	while(i <= mid || j <= b) { // O(d), d = b-a+1
+		RefClause& x = clauses_[i];
+		RefClause& y = clauses_[j];
+		if(i <= mid && 
+				(j > b || (x->learnt > y->learnt || x->locked(this) > y->locked(this) || activity_[x] > activity_[y]))) {
+			tmp[d] = clauses_[i];
+			d++; i++;
+		}
+		else { 
+			tmp[d] = clauses_[j];
+			d++; j++;
+		}
+	}
+	for(int i = a; i <= b; i++) { // O(d), d = b-a+1
+		clauses_[i] = tmp[i-a];
+	}
+}
+
+void Solver::Reduce() {
+	if((int)clauses_.size()-num_fixed_clauses <= kLearntLimit) {
+		return;
+	}
+	//cerr << num_fixed_clauses << " : " << clauses_.size() << endl;
+	SortClausesByActivity(num_fixed_clauses, clauses_.size()-1);
+	while(clauses_.size() - num_fixed_clauses > kLearntLimit) {
+		if(!clauses_.back()->learnt) break;
+		if(clauses_.back()->locked(this)) break;
+		clauses_.back()->active = 0;
+		clauses_.pop_back();
+	}
+}
+
+bool Solver::Verify(bool solvable) {
+	if(IsUnsat()) {
+		Assert(!solvable, "Assignment not found to solvable instance");
+		return true;
+	}
+	for(RefClause clause : clauses_) {
+		bool satisfied = false;
+		for(Literal& lit : clause->lits_) {
+  		if(GetLitValue(lit) == kPositive) {
+  			satisfied = true;
+  		}
+  		Assert(GetLitValue(lit) != kUndefined, "Variable has not been assigned.");
+  	}
+  	Assert(satisfied, "Clause is not satisfied");
+	}
+	Assert(solvable, "Assignment found but it's not solvable :D");
+	return true;
 }
 
 int Solver::FlipValue(int value) {

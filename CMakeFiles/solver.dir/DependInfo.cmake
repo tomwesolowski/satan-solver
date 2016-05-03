@@ -7,7 +7,6 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/tomek/Dropbox/solver/src/Solver.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/Solver.cpp.o"
   "/home/tomek/Dropbox/solver/src/Test.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/Test.cpp.o"
   "/home/tomek/Dropbox/solver/src/types/Clause.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/Clause.cpp.o"
-  "/home/tomek/Dropbox/solver/src/types/ClauseDatabase.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o"
   "/home/tomek/Dropbox/solver/src/types/Literal.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/Literal.cpp.o"
   "/home/tomek/Dropbox/solver/src/types/VarDatabase.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"
   "/home/tomek/Dropbox/solver/src/utils/Helpers.cpp" "/home/tomek/Dropbox/solver/CMakeFiles/solver.dir/src/utils/Helpers.cpp.o"

@@ -19,5 +19,9 @@ const int kNormalClause = 4;
 const int kNewWatcher = 8;
 const int kHoldWatcher = 16;
 
+const int kSolutionFound = 1;
+const int kSolutionNotFound = 2;
+const int kForceRestart = 0;
+
 #endif 
 //CONSTANTS_H

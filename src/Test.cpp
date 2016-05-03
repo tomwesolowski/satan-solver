@@ -60,31 +60,11 @@ TEST(f2, Sample) {
 	}
 	
 }
-
-
 */
 
-TEST(f5, Sample) {
-	for(int i = 1; i < 100; i++) {
-		stringstream ss;
-		ss << i; string s; ss >> s;
-		ifstream ifs("./tests/uf125/uf125-0" + s + ".cnf");
-
-		Solver solver;
-		Parser parser;
-
-		parser.Parse(ifs, solver);
-		
-	  solver.Solve();
-	  solver.Verify();
-	  //solver.Print();	
-	  cerr << ".";
-	}
-	
-}
 
 TEST(Parity, PAR16) {
-	for(int i = 1; i <= 1; i++) {
+	for(int i = 1; i <= 10; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;
 		ifstream ifs("./tests/parity/par16-" + s + ".cnf");
@@ -103,8 +83,6 @@ TEST(Parity, PAR16) {
 }
 
 
-
-
 TEST(SSA, SSA) {
 	for(int i = 1; i < 9; i++) {
 		stringstream ss;
@@ -118,6 +96,24 @@ TEST(SSA, SSA) {
 		
 	  solver.Solve();
 	  solver.Verify(i>4);
+	  //solver.Print();	
+	  cerr << ".";
+	}
+}
+
+TEST(f5, Sample) {
+	for(int i = 1; i < 100; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/uf125/uf125-0" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
 	  //solver.Print();	
 	  cerr << ".";
 	}

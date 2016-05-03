@@ -186,30 +186,6 @@ src/types/Clause.cpp.s:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/Clause.cpp.s
 .PHONY : src/types/Clause.cpp.s
 
-src/types/ClauseDatabase.o: src/types/ClauseDatabase.cpp.o
-.PHONY : src/types/ClauseDatabase.o
-
-# target to build an object file
-src/types/ClauseDatabase.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.o
-.PHONY : src/types/ClauseDatabase.cpp.o
-
-src/types/ClauseDatabase.i: src/types/ClauseDatabase.cpp.i
-.PHONY : src/types/ClauseDatabase.i
-
-# target to preprocess a source file
-src/types/ClauseDatabase.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.i
-.PHONY : src/types/ClauseDatabase.cpp.i
-
-src/types/ClauseDatabase.s: src/types/ClauseDatabase.cpp.s
-.PHONY : src/types/ClauseDatabase.s
-
-# target to generate assembly for a file
-src/types/ClauseDatabase.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/types/ClauseDatabase.cpp.s
-.PHONY : src/types/ClauseDatabase.cpp.s
-
 src/types/Literal.o: src/types/Literal.cpp.o
 .PHONY : src/types/Literal.o
 
@@ -300,9 +276,6 @@ help:
 	@echo "... src/types/Clause.o"
 	@echo "... src/types/Clause.i"
 	@echo "... src/types/Clause.s"
-	@echo "... src/types/ClauseDatabase.o"
-	@echo "... src/types/ClauseDatabase.i"
-	@echo "... src/types/ClauseDatabase.s"
 	@echo "... src/types/Literal.o"
 	@echo "... src/types/Literal.i"
 	@echo "... src/types/Literal.s"
