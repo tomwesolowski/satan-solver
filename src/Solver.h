@@ -19,6 +19,7 @@ class Solver {
 	std::default_random_engine generator_;
 	
 	vector<int> level_;
+  vector<int> polarity_;
   
   vector< vector<RefClause > > watchers_;
 
@@ -31,7 +32,7 @@ class Solver {
 
   int state_ = kUnknownState;
 
- 	vector<int> vars_;
+  vector<int> vars_;
 
   map<RefClause, int> activity_;
 

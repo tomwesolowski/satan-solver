@@ -62,7 +62,7 @@ TEST(f2, Sample) {
 
 
 
-TEST(f250, Sample) {
+TEST(uf150, Sample) {
 	for(int i = 1; i < 100; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;
@@ -81,8 +81,7 @@ TEST(f250, Sample) {
 	
 }
 
-
-TEST(f5, Sample) {
+TEST(uf125, Sample) {
 	for(int i = 1; i < 100; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;

@@ -22,6 +22,7 @@ Literal VarDatabase::GetNext(Solver* solver) {
 	else if(solver->watchers_[lit_pos.index()].size()) {
 		lit = lit_neg;
 	}
+	//cerr << free_vars_.rbegin()->first << endl;
 	return lit;
 }
 
@@ -77,14 +78,48 @@ int VarDatabase::GetNumFree(Solver* solver) {
 
 void VarDatabase::DecayActivities(Solver* solver) {
 	//return;
+	bool rescale = false;
+
 	for(int var = 0; var < num_vars_; var++) {
 		if(IsVarFree(solver, var)) {
 			RemoveFree(solver, var);
-			activity_[var] /= decay;
+			activity_[var] *= kDecayFactor;
 			AddToFreeVars(solver, var);
 		}
 		else {
-			activity_[var] /= decay;
+			activity_[var] *= kDecayFactor;
 		}
+		if(activity_[var] > kMaxActivity) rescale = true;
+	}
+
+	if(rescale) {
+		for(int var = 0; var < num_vars_; var++) {
+			if(IsVarFree(solver, var)) {
+				RemoveFree(solver, var);
+				activity_[var] *= kRescaleFactor;
+				AddToFreeVars(solver, var);
+			}
+			else {
+				activity_[var] *= kRescaleFactor;
+			}
+		}		
+	}
+}
+
+void VarDatabase::AdjustDecay(Solver* solver, double diff_level) {
+	diffs_queue_.push(diff_level);
+	sum_diffs_ += diff_level;
+	if(diffs_queue_.size() > 10) {
+		sum_diffs_ -= diffs_queue_.front();
+		diffs_queue_.pop();
+	}
+	avg_diffs_ = abs(sum_diffs_ / 10);
+	//cerr << avg_diffs_ << endl;
+
+	if(avg_diffs_ <= 20) {
+		kDecayFactor = 0.99;
+	}
+	else {
+		kDecayFactor = 0.75;
 	}
 }

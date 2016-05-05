@@ -294,14 +294,25 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 
 	Assert(currentLevel == CurrentDecisionLevel(), "Dec. level has changed");
 
-	learnt_clause.push_back(-p);
-	swap(learnt_clause.front(), learnt_clause.back());
-
 	int fr = 0;
+	int sum_levels = 0;
 	for(Literal lit : learnt_clause) {
 		fr += (GetLitValue(lit) == kUndefined);
+		sum_levels += level_[lit.var()];
 	}
-	Assert(fr == 1, "Learnt clause must contain exactly one undef. literal. has: " + to_string(fr));
+	double avg_level = (double)sum_levels/learnt_clause.size();
+	double diff_level = 0;
+
+	for(Literal lit : learnt_clause) {
+		diff_level += abs(level_[lit.var()] - avg_level);
+	}
+
+	var_db_.AdjustDecay(this, diff_level);
+
+	learnt_clause.push_back(-p);
+	swap(learnt_clause.front(), learnt_clause.back());
+	
+	Assert(fr == 0, "Learnt clause must not contain undef. literals. has: " + to_string(fr));
 	Assert(GetVarValue(learnt_clause[0].var()) == kUndefined, 
 			"Learnt clause must contain lit[0] == Undefined");
 
