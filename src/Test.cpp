@@ -41,7 +41,9 @@ TEST(f1, Sample) {
   solver.Print();
 }
 
-TEST(f2, Sample) {
+
+
+TEST(pret, Sample) {
 	for(int i = 2; i <= 8; i++) {
 		stringstream ss;
 		ss << i; string s; ss >> s;
@@ -80,6 +82,8 @@ TEST(uf150, Sample) {
 	}
 	
 }
+
+
 
 TEST(uf125, Sample) {
 	for(int i = 1; i < 100; i++) {

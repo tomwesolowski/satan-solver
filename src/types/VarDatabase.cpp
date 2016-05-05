@@ -15,6 +15,14 @@ Literal VarDatabase::GetNext(Solver* solver) {
 	Literal lit_neg(var_free, kNegative);
 	Literal lit(var_free, (rand()%2 ? kPositive : kNegative));
 
+	if(apps_[lit_pos.index()] - solver->watchers_[lit_neg.index()].size() 
+			> apps_[lit_neg.index()] - solver->watchers_[lit_pos.index()].size()) {
+		lit = lit_pos;
+	}
+	else {
+		lit = lit_neg;
+	}
+	/*
 	if(solver->watchers_[lit_neg.index()].size() > 
 			solver->watchers_[lit_pos.index()].size()) {
 		lit = lit_pos;
@@ -22,6 +30,7 @@ Literal VarDatabase::GetNext(Solver* solver) {
 	else if(solver->watchers_[lit_pos.index()].size()) {
 		lit = lit_neg;
 	}
+	*/
 	//cerr << free_vars_.rbegin()->first << endl;
 	return lit;
 }
@@ -44,7 +53,18 @@ void VarDatabase::Init(Solver* solver) {
 	num_vars_ = solver->vars_.size();
 	activity_.resize(num_vars_, 0);
 	is_free_.resize(num_vars_, 0);
+	apps_.resize(2*num_vars_, 0);
 	PrepareFreeVars(solver);
+}
+
+void VarDatabase::ChangeAppearance(Solver* solver, Literal lit, int val) {
+	apps_[lit.index()] += val;	
+}
+
+void VarDatabase::ChangeAppearance(Solver* solver, RefClause clause, int val) {
+	for(Literal& lit : clause->lits_) {
+		ChangeAppearance(solver, lit, val);
+	}
 }
 
 void VarDatabase::RemoveFree(Solver* solver, int var) {
@@ -65,6 +85,12 @@ void VarDatabase::BumpActivity(Solver* solver, int var, int value) {
 		activity_[var] += value;
 	}
 	//activity_[var] += value;
+}
+
+void VarDatabase::BumpActivity(Solver* solver, RefClause clause, int value) {
+	for(Literal& lit : clause->lits_) {
+		BumpActivity(solver, lit.var(), value);
+	}
 }
 
 bool VarDatabase::IsVarFree(Solver* solver, int var) {
@@ -106,17 +132,17 @@ void VarDatabase::DecayActivities(Solver* solver) {
 	}
 }
 
-void VarDatabase::AdjustDecay(Solver* solver, double diff_level) {
-	diffs_queue_.push(diff_level);
-	sum_diffs_ += diff_level;
+void VarDatabase::AdjustDecay(Solver* solver, int diff_levels) {
+	diffs_queue_.push(diff_levels);
+	sum_diffs_ += diff_levels;
 	if(diffs_queue_.size() > 10) {
 		sum_diffs_ -= diffs_queue_.front();
 		diffs_queue_.pop();
 	}
-	avg_diffs_ = abs(sum_diffs_ / 10);
+	avg_diffs_ = sum_diffs_ / diffs_queue_.size();
 	//cerr << avg_diffs_ << endl;
 
-	if(avg_diffs_ <= 20) {
+	if(avg_diffs_ <= 7) {
 		kDecayFactor = 0.99;
 	}
 	else {

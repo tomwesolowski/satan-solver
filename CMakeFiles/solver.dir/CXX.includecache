@@ -6,41 +6,39 @@
 
 #IncludeRegexTransform: 
 
-./src/Solver.h
-VarDatabase.h
-./src/VarDatabase.h
+./src/types/Clause.h
+Literal.h
+./src/types/Literal.h
+
+./src/types/Constants.h
+bits/stdc++.h
+-
+
+./src/types/Literal.h
+Constants.h
+./src/types/Constants.h
+
+./src/types/VarDatabase.h
+bits/stdc++.h
+-
 
 ./src/utils/Helpers.h
 
-/home/tomek/Dropbox/solver/src/types/Clause.h
+/home/tomek/Dropbox/solver/src/Solver.cpp
+bits/stdc++.h
+-
+Constants.h
+/home/tomek/Dropbox/solver/src/Constants.h
 Literal.h
-/home/tomek/Dropbox/solver/src/types/Literal.h
-
-/home/tomek/Dropbox/solver/src/types/Constants.h
-bits/stdc++.h
--
-
-/home/tomek/Dropbox/solver/src/types/Literal.h
-Constants.h
-/home/tomek/Dropbox/solver/src/types/Constants.h
-
-/home/tomek/Dropbox/solver/src/types/VarDatabase.cpp
-bits/stdc++.h
--
-Constants.h
-/home/tomek/Dropbox/solver/src/types/Constants.h
+/home/tomek/Dropbox/solver/src/Literal.h
 Helpers.h
-/home/tomek/Dropbox/solver/src/types/Helpers.h
-Literal.h
-/home/tomek/Dropbox/solver/src/types/Literal.h
+/home/tomek/Dropbox/solver/src/Helpers.h
 Clause.h
-/home/tomek/Dropbox/solver/src/types/Clause.h
-VarDatabase.h
-/home/tomek/Dropbox/solver/src/types/VarDatabase.h
+/home/tomek/Dropbox/solver/src/Clause.h
 Solver.h
-/home/tomek/Dropbox/solver/src/types/Solver.h
+/home/tomek/Dropbox/solver/src/Solver.h
 
-/home/tomek/Dropbox/solver/src/types/VarDatabase.h
-bits/stdc++.h
--
+/home/tomek/Dropbox/solver/src/Solver.h
+VarDatabase.h
+/home/tomek/Dropbox/solver/src/VarDatabase.h
 

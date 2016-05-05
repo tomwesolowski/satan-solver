@@ -16,6 +16,8 @@ class Solver {
   int num_conflicts_ = 0;
   int num_fixed_clauses = 0;
 
+  double avg_level = 0;
+
 	std::default_random_engine generator_;
 	
 	vector<int> level_;

@@ -11,6 +11,10 @@ shared_ptr<Clause> NullClause = nullptr;
 
 bool Solver::Solve() {
 	srand(time(NULL));
+	clock_t start, end;
+  double cpu_time_used;
+     
+  start = clock();
 
 	kLearntLimit = clauses_.size();
 	kConflictLimit = 250;
@@ -25,21 +29,33 @@ bool Solver::Solve() {
 		kLearntLimit *= 1.8;
 		kConflictLimit *= 2.5;
 		status = Search();
+		//cerr << "Avg level: " << avg_level << "/" << vars_.size() << endl;
 	}
 	while(status == kForceRestart);
 	state_ = status;
 
-	cerr << "clauses: " << clauses_.size() << " learnt: " << num_learnt_ << " conf: " << num_conflicts_ << endl;
+	end = clock();
+  cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+	cerr << "clauses: " << clauses_.size() << " learnt: " << num_learnt_ << " conf: " << num_conflicts_ <<  " time: " << cpu_time_used << endl;
   return IsSat();
 }
 
 int Solver::Search() {
-	int iteration = 0;
+	int iteration = 1;
+	avg_level = 0;
+	long double sum_levels = 0;
   while (IsUnsolved()) {
-  	//Cerr << clauses_.size() << endl;
-    RefClause conflict = Propagate();
+  	//cerr << clauses_.size() << endl;
+  	RefClause conflict = Propagate();
+
+  	assert(trail_.size() <= vars_.size());
+  	sum_levels += trail_.size();
+  	avg_level = sum_levels / iteration;
+  	//cerr << trail_.size() << endl;
     if (conflict == NullClause) {
       if(!GetNumFree()) {
+      	assert(trail_.size() == vars_.size());
       	return kSatisfiableState;
       }
       if(++num_conflicts_ > kConflictLimit) {
@@ -49,6 +65,7 @@ int Solver::Search() {
     		Simplify();
     	}
     	Reduce();
+    	if(iteration%10 <= 0) var_db_.DecayActivities(this);
       Decide();
     } else {
     	if(CurrentDecisionLevel() <= 0) {
@@ -61,8 +78,8 @@ int Solver::Search() {
       int level = Analyze(conflict, learnt_clause);
       Backtrack(level);
       assert(AddClause(learnt_clause, true));
-      if((iteration++)%10 <= 0) var_db_.DecayActivities(this);
     }
+    iteration++;
   }
   Assert(false, "Solved instance has not been caught.");
   return kUnsatisfiableState;
@@ -89,11 +106,8 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 			last_var = lit.var();
 		}
 	}
-
-		//TODO
-	for(Literal& lit : lits) {
-		var_db_.BumpActivity(this, lit.var(), max(1, 100-(int)lits.size()));
-	}
+	
+	//TODO
 
 	assert(lits.size() > 0);
 	assert(!learnt || lits.size() > 1 || CurrentDecisionLevel() == 0);
@@ -101,6 +115,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 	num_learnt_ += learnt;
 
 	if(lits.size() <= 1) {
+		var_db_.BumpActivity(this, lits[0].var(), 1);
 		if(!Enqueue(lits[0])) {
 			return false;
 		}
@@ -124,6 +139,8 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 	clause->learnt = learnt;
 
 	BumpActivity(clause);
+	var_db_.ChangeAppearance(this, clause, 1);
+	var_db_.BumpActivity(this, clause, 100-(int)lits.size());
 
 	if(learnt) {
 		Assert(Enqueue(lits[0], clause), "Enqueuing learn literal failed");
@@ -184,9 +201,7 @@ RefClause Solver::Propagate() {
   				conflict = clause;
 
   				//todo
-  				for(Literal& lit : conflict->lits_) {
-  					var_db_.BumpActivity(this, lit.var());
-  				}
+  				var_db_.BumpActivity(this, conflict);
   				break;
   			}
   		}
@@ -295,19 +310,13 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 	Assert(currentLevel == CurrentDecisionLevel(), "Dec. level has changed");
 
 	int fr = 0;
-	int sum_levels = 0;
+	set<int> diff_levels;
 	for(Literal lit : learnt_clause) {
 		fr += (GetLitValue(lit) == kUndefined);
-		sum_levels += level_[lit.var()];
-	}
-	double avg_level = (double)sum_levels/learnt_clause.size();
-	double diff_level = 0;
-
-	for(Literal lit : learnt_clause) {
-		diff_level += abs(level_[lit.var()] - avg_level);
+		diff_levels.insert(level_[lit.var()]);
 	}
 
-	var_db_.AdjustDecay(this, diff_level);
+	var_db_.AdjustDecay(this, diff_levels.size());
 
 	learnt_clause.push_back(-p);
 	swap(learnt_clause.front(), learnt_clause.back());
@@ -514,6 +523,8 @@ void Solver::Reduce() {
 		if(!clauses_.back()->learnt) break;
 		if(clauses_.back()->locked(this)) break;
 		clauses_.back()->active = 0;
+
+		var_db_.ChangeAppearance(this, clauses_.back(), -1);
 
 		clauses_.pop_back();
 	}
