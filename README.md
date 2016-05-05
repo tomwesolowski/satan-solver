@@ -15,7 +15,7 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 + DIMACS parser (reading input) - our solver can communicate with the world!
 + Variable, clauses management - simple, but powerful! (for now)
 + Backtracking (with backjumping) - when everything goes wrong, sometimes the best option is just to give up or give up-up or give up-up-up
-+ Simple heuristics for variable decisions - we pick up the most "active" variable, occured in the biggest number of clauses and encountered conflicts
++ VDIDS heuristic for variable decision and its new version based on paper: https://ece.uwaterloo.ca/~vganesh/Publications_files/vg2015-UnderstandingVSIDS-HVC15.pdf
 + Unit propagation in linear time - using two-watched literals with custom little tweaks
 + Inferred/learnt clauses mechanism - our solver can learn (smart beast!) from its mistake to avoid similar ones in the future by analyzing implication graph and finding causes of encountered conflicts
 + Simplifying clauses - when we're sure how literal has to be assigned, we don't want process it over and over again
@@ -24,7 +24,7 @@ We would like to thank Dr Michał Wrona for inspiring us to create this project.
 
 <h3> More to come </h3>
 
-+ VDIDS heuristic for variable decision and its new version based on paper: https://ece.uwaterloo.ca/~vganesh/Publications_files/vg2015-UnderstandingVSIDS-HVC15.pdf
++ Smarter restarts policy
 + Better management of learnt clauses
 + Deriving and solving subproblems with fast, polynomial algorithms (for 2-SAT, Horn-SAT etc.)
 + Modularity - we want our solver to be flexible and consist of disjoint and easy-to-swap modules for different heuristics. Furthermore, solver should be able to evaluate efficiency of heuristics and pick the best one for specific instance.
