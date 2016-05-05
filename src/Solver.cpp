@@ -13,7 +13,7 @@ bool Solver::Solve() {
 	srand(time(NULL));
 
 	kLearntLimit = clauses_.size();
-	kConflictLimit = 450;
+	kConflictLimit = 250;
 
 	int status;
 	do {
@@ -23,7 +23,7 @@ bool Solver::Solve() {
 		//cerr << "@";
 		cerr << "_";
 		kLearntLimit *= 1.8;
-		kConflictLimit *= 1.5;
+		kConflictLimit *= 2.5;
 		status = Search();
 	}
 	while(status == kForceRestart);
@@ -34,6 +34,7 @@ bool Solver::Solve() {
 }
 
 int Solver::Search() {
+	int iteration = 0;
   while (IsUnsolved()) {
   	//Cerr << clauses_.size() << endl;
     RefClause conflict = Propagate();
@@ -60,6 +61,7 @@ int Solver::Search() {
       int level = Analyze(conflict, learnt_clause);
       Backtrack(level);
       assert(AddClause(learnt_clause, true));
+      if((iteration++)%10 <= 0) var_db_.DecayActivities(this);
     }
   }
   Assert(false, "Solved instance has not been caught.");
@@ -90,7 +92,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 
 		//TODO
 	for(Literal& lit : lits) {
-		var_db_.BumpActivity(this, lit.var(), 50-lits.size());
+		var_db_.BumpActivity(this, lit.var(), max(1, 100-(int)lits.size()));
 	}
 
 	assert(lits.size() > 0);
@@ -120,6 +122,8 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 
 	RefClause clause = Clause::Create(this, lits);
 	clause->learnt = learnt;
+
+	BumpActivity(clause);
 
 	if(learnt) {
 		Assert(Enqueue(lits[0], clause), "Enqueuing learn literal failed");
@@ -238,7 +242,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   for(Literal lit : conflict->lits_) {
 			Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << ":" << level_[lit.var()] << " ";
 		}
-		Cerr << "@ " << CurrentDecisionLevel() << endl;
+	Cerr << "@ " << CurrentDecisionLevel() << endl;
 
   do {
   	reason.clear();
@@ -264,7 +268,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 		}
 
   	for(Literal& lit : reason) {
-  		Cerr << lit.var() << " " << lit.sign() << " " << (reason_[lit.var()] != nullptr) << "lvl: " << level_[lit.var()] << endl;
+  		//Cerr << lit.var() << " " << lit.sign() << " " << (reason_[lit.var()] != nullptr) << "lvl: " << level_[lit.var()] << endl;
   		int var_level = level_[lit.var()];
   		if(!seen[lit.var()]) {
   			seen[lit.var()] = 1;
@@ -403,6 +407,9 @@ void Solver::UnsetVar() {
 	trail_.pop_back();
 }
 
+void Solver::BumpActivity(RefClause clause, int value) {
+	activity_[clause] += value;
+}
 
 Literal Solver::RemoveFromPropagateQueue() {
 	Assert(prop_queue_.size(), "Trying to pop from empty prop queue.");
@@ -455,7 +462,6 @@ void Solver::SortClausesByActivity() {
 
 void Solver::SortClausesByActivity(int a, int b) {
 	if(a > b) {
-		cerr << a << " " << b << endl;
 		assert(false);
 	}
 	if(a == b) {
@@ -497,6 +503,7 @@ void Solver::Reduce() {
 		if(!clauses_.back()->learnt) break;
 		if(clauses_.back()->locked(this)) break;
 		clauses_.back()->active = 0;
+
 		clauses_.pop_back();
 	}
 }
@@ -526,7 +533,7 @@ int Solver::FlipValue(int value) {
 }
 
 int Solver::GetNumFree() {
-	return var_db_.free_vars_.size();
+	return var_db_.GetNumFree(this);
 }
 
 // FOR DEBUG

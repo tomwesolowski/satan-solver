@@ -82,6 +82,8 @@ class Solver {
 
   struct CompActivity;
 
+  void BumpActivity(RefClause clause, int value = 1);
+
   void SortClausesByActivity(int a, int b);
 
   bool IsUnitClause(RefClause clause);

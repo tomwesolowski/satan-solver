@@ -4,4 +4,4 @@
 - wybieraj znak, taki jak przy większości obserwowanych [OK]
 - podczas update'u watcherów, swapuj przez trzeci literał [OK]
 - upraszczaj klauzule na poziomie 0 [OK]
-- sort by activity w O(nlogn)
+- sort by activity w O(nlogn) [OK]

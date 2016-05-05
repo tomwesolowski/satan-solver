@@ -7,10 +7,13 @@ class Solver;
 
 class VarDatabase {
 public:
-	int num_vars_;
+	int num_vars_ = 0;
+	int num_free_ = 0;
+	double decay = 0.99;
 
-	set< pair<int, int> > free_vars_; // <activeness, var>
-  vector<int> activity_; // number of clauses with literal i
+	set< pair<double, int> > free_vars_; // <activeness, var>
+  vector<int> activity_;
+  vector<int> is_free_;
 
   void Init(Solver* solver);
 
@@ -23,6 +26,10 @@ public:
   void BumpActivity(Solver* solver, int var, int value = 1);
 
   bool IsVarFree(Solver* solver, int var);
+
+  int GetNumFree(Solver* solver);
+
+  void DecayActivities(Solver* solver);
 
  	Literal GetNext(Solver* solver);
 };
