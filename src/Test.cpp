@@ -43,25 +43,6 @@ TEST(f1, Sample) {
 
 
 
-TEST(pret, Sample) {
-	for(int i = 2; i <= 8; i++) {
-		stringstream ss;
-		ss << i; string s; ss >> s;
-		ifstream ifs("./tests/pret/pret" + s + ".cnf");
-
-		Parser parser;
-		Solver solver;
-
-		parser.Parse(ifs, solver);
-		
-	  solver.Solve();
-	  solver.Verify(i>4);
-	  //solver.Print();	
-	  cerr << ".";
-	}
-	
-}
-
 
 
 TEST(uf150, Sample) {
@@ -104,7 +85,192 @@ TEST(uf125, Sample) {
 	
 }
 
+
+
+TEST(pret, Sample) {
+	for(int i = 2; i <= 8; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/pret/pret" + s + ".cnf");
+
+		Parser parser;
+		Solver solver;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify(i>4);
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+
 */
+
+
+TEST(hanoi, Sample) {
+	for(int i = 4; i <= 4; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/hanoi/hanoi" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+TEST(flat125, Sample) {
+	for(int i = 1; i < 100; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/flat125/flat125-" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+/*
+
+TEST(bmc, Sample) {
+	for(int i = 1; i <= 13; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/bmc/bmc-ibm-" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  //solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
+
+TEST(jnh, Sample) {
+	for(int i = 1; i <= 20; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/jnh/jnh" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  //solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+TEST(jnh200, Sample) {
+	for(int i = 1; i <= 20; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		while(s.size() < 2) s = "0" + s;
+		ifstream ifs("./tests/jnh/jnh2" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  //solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+TEST(uuf50, Sample) {
+	for(int i = 1; i < 100; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/unsat50/uuf50-0" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify(false);
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+TEST(uf100, Sample) {
+	for(int i = 1; i < 100; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/uf100/uf100-0" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+TEST(f3, Sample) {
+	for(int i = 1; i < 10; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/uf150/uf150-0" + s + ".cnf");
+
+		Solver solver;
+		Parser parser;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
+
 
 TEST(Parity, PAR16) {
 	for(int i = 1; i <= 10; i++) {
@@ -124,6 +290,27 @@ TEST(Parity, PAR16) {
 	}
 	
 }
+
+
+TEST(Parity, PAR32) {
+	for(int i = 1; i <= 10; i++) {
+		stringstream ss;
+		ss << i; string s; ss >> s;
+		ifstream ifs("./tests/parity/par32-" + s + ".cnf");
+
+		Parser parser;
+		Solver solver;
+
+		parser.Parse(ifs, solver);
+		
+	  solver.Solve();
+	  solver.Verify();
+	  //solver.Print();	
+	  cerr << ".";
+	}
+	
+}
+
 
 TEST(SSA, SSA) {
 	for(int i = 1; i < 9; i++) {
@@ -167,24 +354,7 @@ TEST(f4, Sample) {
 
 
 
-TEST(f6, Sample) {
-	for(int i = 1; i < 100; i++) {
-		stringstream ss;
-		ss << i; string s; ss >> s;
-		ifstream ifs("./tests/unsat50/uuf50-0" + s + ".cnf");
 
-		Solver solver;
-		Parser parser;
-
-		parser.Parse(ifs, solver);
-		
-	  solver.Solve();
-	  solver.Verify(false);
-	  //solver.Print();	
-	  cerr << ".";
-	}
-	
-}
 
 
 TEST(f3, Sample) {

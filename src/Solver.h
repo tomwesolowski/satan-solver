@@ -8,6 +8,9 @@ const int DEBUG = 0;
 
 class Solver {
  public:
+  const double G = 0.9999;
+
+  double agility = 0;
 
   int kLearntLimit;
   int kConflictLimit;
@@ -17,6 +20,7 @@ class Solver {
   int num_fixed_clauses = 0;
 
   double avg_level = 0;
+  int smalls_reduced = 0;
 
 	std::default_random_engine generator_;
 	

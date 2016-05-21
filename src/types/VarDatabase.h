@@ -43,6 +43,8 @@ public:
 
   void ChangeAppearance(Solver* solver, RefClause clause, int val = 1);
 
+  void DecayAppearances(Solver* solver);
+
   void DecayActivities(Solver* solver);
 
   void AdjustDecay(Solver* solver, int diff_levels);

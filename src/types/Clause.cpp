@@ -44,3 +44,23 @@ int Clause::FindWatcher(Solver* solver) {
 
   return kHoldWatcher | kUnitClause;
 }
+
+int Clause::GetNumFreeLiterals(Solver* solver) {
+	int fr = 0;
+	for(Literal& lit : lits_) {
+		fr += solver->IsVarUndefined(lit.var());
+	}
+	return fr;
+}
+
+double Clause::GetFulfillment(Solver* solver) {
+	return (double)GetNumFreeLiterals(solver) / lits_.size();
+}
+
+int Clause::GetLBD(Solver* solver) {
+	set<int> diff_levels;
+	for(Literal& lit : lits_) {
+		diff_levels.insert(solver->level_[lit.var()]);
+	}
+	return diff_levels.size();
+}

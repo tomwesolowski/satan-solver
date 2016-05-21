@@ -22,6 +22,12 @@ public:
 
   int FindWatcher(Solver* solver);
 
+  int GetNumFreeLiterals(Solver* solver);
+
+  double GetFulfillment(Solver* solver);
+
+  int GetLBD(Solver* solver);
+
   bool locked(Solver* solver);
 
   bool operator<(const Clause& clause) const {

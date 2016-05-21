@@ -1,7 +1,7 @@
 struct Parser {
 
 	string line_;
-
+	string last_;
 
 	void Parse(ifstream& ifs, Solver &solver) {
 		//comments
@@ -9,11 +9,13 @@ struct Parser {
 		Assert(ifs.good(), "Stream is not opened.");
 
 		bool found_start = false;
+
 		while(ifs >> line_) {
-			if(line_ == "cnf") {
+			if(last_ == "p" && line_ == "cnf") {
 				found_start = true;
 				break;
 			}
+			last_ = line_;
 		}
 
 		Assert(found_start, "CNF not found");

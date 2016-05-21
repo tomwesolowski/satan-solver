@@ -16,7 +16,7 @@ bool Solver::Solve() {
      
   start = clock();
 
-	kLearntLimit = clauses_.size();
+	kLearntLimit = min(100, (int)clauses_.size());
 	kConflictLimit = 250;
 
 	int status;
@@ -27,9 +27,10 @@ bool Solver::Solve() {
 		//cerr << "@";
 		cerr << "_";
 		kLearntLimit *= 1.8;
-		kConflictLimit *= 2.5;
+		kConflictLimit *= 1.1;
 		status = Search();
 		//cerr << "Avg level: " << avg_level << "/" << vars_.size() << endl;
+		//cerr << "smalls: " << smalls_reduced << " " << num_learnt_ << endl;
 	}
 	while(status == kForceRestart);
 	state_ = status;
@@ -44,7 +45,9 @@ bool Solver::Solve() {
 int Solver::Search() {
 	int iteration = 1;
 	avg_level = 0;
+	agility = 1;
 	long double sum_levels = 0;
+
   while (IsUnsolved()) {
   	//cerr << clauses_.size() << endl;
   	RefClause conflict = Propagate();
@@ -58,14 +61,15 @@ int Solver::Search() {
       	assert(trail_.size() == vars_.size());
       	return kSatisfiableState;
       }
-      if(++num_conflicts_ > kConflictLimit) {
+      if(++num_conflicts_ > kConflictLimit && agility < 0.3) {
       	return kForceRestart;
       }
       if(CurrentDecisionLevel() == 0) {
     		Simplify();
     	}
-    	Reduce();
+    	/*if(iteration%10 <= 0)*/ Reduce();
     	if(iteration%10 <= 0) var_db_.DecayActivities(this);
+    	if(iteration%100 <= 0) var_db_.DecayAppearances(this);
       Decide();
     } else {
     	if(CurrentDecisionLevel() <= 0) {
@@ -80,6 +84,7 @@ int Solver::Search() {
       assert(AddClause(learnt_clause, true));
     }
     iteration++;
+    //if(agility < 0.5 || iteration%1000 == 0) cerr << "ag: " << agility << endl;
   }
   Assert(false, "Solved instance has not been caught.");
   return kUnsatisfiableState;
@@ -87,6 +92,7 @@ int Solver::Search() {
 
 void Solver::InitVars(int num_vars) { 
 	vars_.resize(num_vars, kUndefined);
+	polarity_.resize(num_vars, kUndefined);
 	reason_.resize(num_vars, nullptr);
 	watchers_.resize(2*num_vars);
 	level_.resize(num_vars);
@@ -140,7 +146,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
 
 	BumpActivity(clause);
 	var_db_.ChangeAppearance(this, clause, 1);
-	var_db_.BumpActivity(this, clause, 100-(int)lits.size());
+	var_db_.BumpActivity(this, clause, max(1, 100-(int)lits.size()));
 
 	if(learnt) {
 		Assert(Enqueue(lits[0], clause), "Enqueuing learn literal failed");
@@ -254,10 +260,10 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
   int counter = 0;
   int currentLevel = CurrentDecisionLevel();
 
-  for(Literal lit : conflict->lits_) {
+  /*for(Literal lit : conflict->lits_) {
 			Cerr << lit.var() << ":" << lit.sign() << ":" << GetLitValue(lit) << ":" << level_[lit.var()] << " ";
 		}
-	Cerr << "@ " << CurrentDecisionLevel() << endl;
+	Cerr << "@ " << CurrentDecisionLevel() << endl;*/
 
   do {
   	reason.clear();
@@ -311,7 +317,7 @@ int Solver::Analyze(RefClause conflict, vector<Literal>& learnt_clause) {
 
 	int fr = 0;
 	set<int> diff_levels;
-	for(Literal lit : learnt_clause) {
+	for(Literal& lit : learnt_clause) {
 		fr += (GetLitValue(lit) == kUndefined);
 		diff_levels.insert(level_[lit.var()]);
 	}
@@ -347,9 +353,15 @@ bool Solver::Enqueue(Literal lit, RefClause from) {
 	reason_[lit.var()] = from;
 	prop_queue_.push(lit);
 
+	if(polarity_[lit.var()] != lit.sign()) {
+		agility += (1-G);
+	}
+	agility *= G;
+	polarity_[lit.var()] = lit.sign();
+
 	if(from != nullptr) {
 		int found = 0;
-		for(Literal x : from->lits_) {
+		for(Literal& x : from->lits_) {
 			found += (x == lit);
 		}
 		Assert(found, "Literal not found in reason during enqueuing");
@@ -482,6 +494,8 @@ void Solver::SortClausesByActivity() {
 
 void Solver::SortClausesByActivity(int a, int b) {
 	if(a > b) {
+		//cerr << a << " " << b << endl;
+		return;
 		assert(false);
 	}
 	if(a == b) {
@@ -499,7 +513,11 @@ void Solver::SortClausesByActivity(int a, int b) {
 		RefClause& x = clauses_[i];
 		RefClause& y = clauses_[j];
 		if(i <= mid && 
-				(j > b || (x->learnt > y->learnt || x->locked(this) > y->locked(this) || activity_[x] > activity_[y]))) {
+				(j > b || 
+					(x->learnt > y->learnt || 
+					x->locked(this) > y->locked(this) || 
+					//(x->lits_.size() <= 3) > (y->lits_.size() <= 3) ||
+					x->GetFulfillment(this)*activity_[x] > y->GetFulfillment(this)*activity_[y] ))) {
 			tmp[d] = clauses_[i];
 			d++; i++;
 		}
@@ -525,6 +543,8 @@ void Solver::Reduce() {
 		clauses_.back()->active = 0;
 
 		var_db_.ChangeAppearance(this, clauses_.back(), -1);
+
+		smalls_reduced += (clauses_.back()->lits_.size() <= 3);
 
 		clauses_.pop_back();
 	}

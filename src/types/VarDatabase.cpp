@@ -67,6 +67,13 @@ void VarDatabase::ChangeAppearance(Solver* solver, RefClause clause, int val) {
 	}
 }
 
+void VarDatabase::DecayAppearances(Solver* solver) {
+	return;
+	for(int& app : apps_) {
+		app *= 0.8;
+	}
+}
+
 void VarDatabase::RemoveFree(Solver* solver, int var) {
 	//Cerr << "rem " << var << ":" << var_db_.activity_[var] << endl;
 	Assert(IsVarFree(solver, var), "Variable was not free");
