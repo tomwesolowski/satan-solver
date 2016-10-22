@@ -22,7 +22,6 @@ int Literal::index() const {
 }
 
 Literal Literal::operator-() {
-	assert(sign() != kUndefined);
   return Literal(var(), (sign() == kNegative ? kPositive : kNegative));
 }
 

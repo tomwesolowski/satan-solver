@@ -1,1 +1,1 @@
-/home/tomek/Dropbox/solver/CMakeFiles/solver.dir
+/home/tomek/satan-solver/satan-solver/CMakeFiles/solver.dir

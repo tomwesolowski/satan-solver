@@ -3,9 +3,8 @@ struct Parser {
 	string line_;
 	string last_;
 
+	// Parse CNF file.
 	void Parse(ifstream& ifs, Solver &solver) {
-		//comments
-
 		Assert(ifs.good(), "Stream is not opened.");
 
 		bool found_start = false;
@@ -25,7 +24,7 @@ struct Parser {
 
 		solver.InitVars(num_vars);
 
-		//clauses
+		// Clauses
 		int var;
 		while(num_clauses--) {
 			vector<Literal> lits;

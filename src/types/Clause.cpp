@@ -23,17 +23,10 @@ bool Clause::locked(Solver* solver) {
 	return solver->reason_[lits_[1].var()].get() == this; 
 }
 
-// new watcher always at index 0
 int Clause::FindWatcher(Solver* solver) {
-
-	Assert(solver->GetLitValue(lits_[0]) != kUndefined, "First literal is not assigned!");
-
-  assert(solver->GetLitValue(lits_[0]) == kNegative);
-
 	if(solver->GetLitValue(lits_[1]) == kPositive) {
 		return kHoldWatcher | kNormalClause;
 	}
-
 	for(int j = 2; j < lits_.size(); j++) {
     if(solver->GetLitValue(lits_[j]) != kNegative) {
       swap(lits_[2], lits_[j]);
@@ -41,16 +34,15 @@ int Clause::FindWatcher(Solver* solver) {
       return kNewWatcher | kNormalClause;
     }
   }
-
   return kHoldWatcher | kUnitClause;
 }
 
 int Clause::GetNumFreeLiterals(Solver* solver) {
-	int fr = 0;
+	int free_literals = 0;
 	for(Literal& lit : lits_) {
-		fr += solver->IsVarUndefined(lit.var());
+		free_literals += solver->IsVarUndefined(lit.var());
 	}
-	return fr;
+	return free_literals;
 }
 
 double Clause::GetFulfillment(Solver* solver) {
