@@ -22,7 +22,7 @@ TEST(TestSample, Sample) {
 }
 
 TEST(uf50, Sample) {
-	for(int i = 1; i < 100; i++) {
+	for(int i = 1; i < 1000; i++) {
 		std::ostringstream oss;
 		oss << "./tests/uf50/uf50-0" << i << ".cnf";
 		ifstream ifs(oss.str());

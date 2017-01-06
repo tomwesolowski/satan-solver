@@ -8,17 +8,13 @@ class Clause;
 
 typedef shared_ptr<Clause> RefClause;
 
+// Contains all information we have about single clause.
 class Clause {
-public:
-	int id_;
-	bool active = true;
-	bool learnt = false;
+ public:
+  Clause(vector<Literal>& lits, int id, bool active, bool learnt);
 
-  vector<Literal> lits_;
-
-  static RefClause Create(Solver* solver, vector<Literal>& lits);
-
-  Clause(vector<Literal>& lits, int id);
+  static RefClause Create(
+      Solver* solver, vector<Literal>& lits, bool active, bool learnt);
 
   int FindWatcher(Solver* solver);
 
@@ -28,11 +24,26 @@ public:
 
   int GetLBD(Solver* solver);
 
-  bool locked(Solver* solver);
+  bool IsLocked(Solver* solver);
+
+  bool IsLearnt();
+
+  bool IsActive();
+
+  void Deactive();
 
   bool operator<(const Clause& clause) const {
   	return id_ < clause.id_;
   }
+
+ private:
+  int id_;
+  bool active_;
+  bool learnt_;
+  vector<Literal> lits_;
+
+ friend class Solver;
+ friend class VarDatabase;
 };
 
 

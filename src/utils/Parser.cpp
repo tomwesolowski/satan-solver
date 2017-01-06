@@ -8,7 +8,9 @@ void Parser::Parse(ifstream& ifs, Solver &solver) {
 	Assert(ifs.good(), "Stream is not opened.");
 
 	bool found_start = false;
-
+	int num_vars;
+	int num_clauses;
+	// Read data from file line by line.
 	while(ifs >> line_) {
 		if(last_ == "p" && line_ == "cnf") {
 			found_start = true;
@@ -16,15 +18,13 @@ void Parser::Parse(ifstream& ifs, Solver &solver) {
 		}
 		last_ = line_;
 	}
-
 	Assert(found_start, "CNF not found");
 	
-	int num_vars, num_clauses;
+	// Init solver.
 	ifs >> num_vars >> num_clauses;
-
 	solver.InitVars(num_vars);
 
-	// Clauses
+	// Parse clauses and add them to Solver.
 	int var;
 	while(num_clauses--) {
 		std::vector<Literal> lits;

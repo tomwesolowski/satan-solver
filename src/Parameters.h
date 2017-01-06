@@ -1,6 +1,9 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 
+// Here you can set up all parameters of Solver.
+// Be careful, they have been chosen after lots of experiments.
+// Solver can slow down significantly if you change any of them.
 struct SolverParameters {
 	// Solver parameters.
   double G = 0.9999;

@@ -116,7 +116,6 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
     }
     return true;
   }
-
   if(learnt) {
     for(int i = 2; i < lits.size(); i++) {
       if(level_[lits[i].var()] > level_[lits[1].var()]) {
@@ -125,8 +124,7 @@ bool Solver::AddClause(vector<Literal> lits, bool learnt) {
     }
   }
 
-  RefClause clause = Clause::Create(this, lits);
-  clause->learnt = learnt;
+  RefClause clause = Clause::Create(this, lits, true, learnt);
 
   BumpActivity(clause);
   var_db_.ChangeAppearance(clause, 1);
@@ -164,7 +162,7 @@ RefClause Solver::Propagate() {
       RefClause clause = watchers.back();
       watchers.pop_back();
 
-      if(!clause->active) {
+      if(!clause->IsActive()) {
         continue;
       }
 
@@ -183,7 +181,7 @@ RefClause Solver::Propagate() {
     if(conflict != nullptr) {
       // Add remaining watching clauses.
       for(RefClause rem_clause: watchers) {
-        if(rem_clause->active) {
+        if(rem_clause->IsActive()) {
           watchers_[lit.index()].push_back(rem_clause); 
         }
       }
@@ -362,10 +360,10 @@ struct Solver::CompActivity {
     solver_(solver) {}
 
   bool operator() (const RefClause& a, const RefClause& b) const {
-    if(a->learnt < b->learnt) {
+    if(a->IsLearnt() < b->IsLearnt()) {
       return true;
     }
-    if(a->locked(solver_) > b->locked(solver_)) {
+    if(a->IsLocked(solver_) > b->IsLocked(solver_)) {
       return true;
     }
     return solver_->activity_[a] > solver_->activity_[b];
@@ -392,8 +390,8 @@ void Solver::SortClausesByActivity(int a, int b) {
     RefClause& y = clauses_[j];
     if(i <= mid && 
           (j > b || 
-              (x->learnt > y->learnt || 
-              x->locked(this) > y->locked(this) || 
+              (x->IsLearnt() > y->IsLearnt() || 
+              x->IsLocked(this) > y->IsLocked(this) || 
               x->GetFulfillment(this)*activity_[x] > 
                   y->GetFulfillment(this)*activity_[y] ))) {
       tmp[d] = clauses_[i];
@@ -415,10 +413,10 @@ void Solver::Reduce() {
   }
   SortClausesByActivity(num_fixed_clauses, clauses_.size()-1);
   while(clauses_.size() - num_fixed_clauses > learnt_limit_) {
-    if(!clauses_.back()->learnt) break;
-    if(clauses_.back()->locked(this)) break;
+    if(!clauses_.back()->IsLearnt()) break;
+    if(clauses_.back()->IsLocked(this)) break;
 
-    clauses_.back()->active = 0;
+    clauses_.back()->Deactive();
     var_db_.ChangeAppearance(clauses_.back(), -1);
     smalls_reduced += (clauses_.back()->lits_.size() <= 3);
     clauses_.pop_back();
@@ -531,25 +529,45 @@ int Solver::CurrentDecisionLevel() {
   return decision_levels_.size();
 }
 
-bool Solver::IsLitPositive(Literal& lit) { return GetLitValue(lit) == kPositive; }
+bool Solver::IsLitPositive(Literal& lit) { 
+  return GetLitValue(lit) == kPositive;
+}
 
-bool Solver::IsLitNegative(Literal& lit) { return GetLitValue(lit) == kNegative; }
+bool Solver::IsLitNegative(Literal& lit) { 
+  return GetLitValue(lit) == kNegative; 
+}
 
-bool Solver::IsVarPositive(int var) { return GetVarValue(var) == kPositive; }
+bool Solver::IsVarPositive(int var) { 
+  return GetVarValue(var) == kPositive; 
+}
 
-bool Solver::IsVarNegative(int var) { return GetVarValue(var) == kNegative; }
+bool Solver::IsVarNegative(int var) { 
+  return GetVarValue(var) == kNegative; 
+}
 
-bool Solver::IsVarUndefined(int var) { return GetVarValue(var) == kUndefined; }
+bool Solver::IsVarUndefined(int var) { 
+  return GetVarValue(var) == kUndefined; 
+}
 
-void Solver::SetSat() { state_ = kSatisfiableState; }
+void Solver::SetSat() { 
+  state_ = kSatisfiableState; 
+}
 
-void Solver::SetUnsat() { state_ = kUnsatisfiableState; }
+void Solver::SetUnsat() { 
+  state_ = kUnsatisfiableState; 
+}
 
-int Solver::IsSat() { return state_ == kSatisfiableState; }
+int Solver::IsSat() { 
+  return state_ == kSatisfiableState; 
+}
 
-int Solver::IsUnsat() { return state_ == kUnsatisfiableState; }
+int Solver::IsUnsat() { 
+  return state_ == kUnsatisfiableState; 
+}
 
-int Solver::IsUnsolved() { return state_ == kUnknownState; }
+int Solver::IsUnsolved() { 
+  return state_ == kUnknownState; 
+}
 
 void Solver::Print() {
   Assert(!IsUnsolved(), "Did you run solver?");

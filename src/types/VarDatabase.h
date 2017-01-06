@@ -6,6 +6,9 @@
 #include "Literal.h"
 #include "Parameters.h"
 
+// Class responsible for picking the best next variable to assign.
+// Contains lots of parameters that keep track of "activity" of
+// every variable.
 class VarDatabase {
 public:
   VarDatabase(SolverParameters params);
@@ -40,6 +43,7 @@ public:
       int free_var, int num_watchers_pos, int num_watchers_neg);
 
  private:
+  // Input parameters.
   double decay_factor_;
   double rescale_factor_;
   double max_activity_;
@@ -57,6 +61,7 @@ public:
   int sum_diffs_ = 0;
   double avg_diffs_ = 0;
 
+  // Variables properties.
 	set< pair<int, int> > free_vars_; // <activeness, var>
   vector<int> activity_;
   vector<int> is_free_;

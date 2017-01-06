@@ -6,11 +6,6 @@
 #include "Literal.h"
 #include "VarDatabase.h"
 
-using std::queue;
-using std::pair;
-using std::set;
-using std::vector;
-
 VarDatabase::VarDatabase(SolverParameters params) {
 	decay_factor_ = params.decay_factor_;
 	rescale_factor_ = params.rescale_factor_;
@@ -21,10 +16,12 @@ VarDatabase::VarDatabase(SolverParameters params) {
 	decay_factor_fast_ = params.decay_factor_fast_;
 }
 
+// Pick the most active variable to assign.
 int VarDatabase::GetVarCandidate() {
 	return free_vars_.rbegin()->second;
 }
 
+// Decide if we should choose positive or negative literal.
 Literal VarDatabase::GetNext(
 		int free_var, int num_watchers_pos, int num_watchers_neg) {
 	Literal lit_pos(free_var, kPositive);

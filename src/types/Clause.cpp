@@ -1,27 +1,25 @@
 #include <bits/stdc++.h>
 
-using namespace std;
-
 #include "Constants.h"
+#include "Clause.h"
 #include "Helpers.h"
 #include "Literal.h"
-#include "Clause.h"
 #include "VarDatabase.h"
 #include "Solver.h"
 
-RefClause Clause::Create(Solver* solver, vector<Literal>& lits) {
+using namespace std;
+
+RefClause Clause::Create(
+		Solver* solver, vector<Literal>& lits, bool active, bool learnt) {
 	static int id = 0; 
-	return make_shared<Clause>(lits, id++);
+	return make_shared<Clause>(lits, id++, active, learnt);
 }
 
-Clause::Clause(vector<Literal>& lits, int id) {
-	id_ = id;
-	lits_ = lits;
-}
-
-bool Clause::locked(Solver* solver) {
-	return solver->GetReason(lits_[1].var()).get() == this; 
-}
+Clause::Clause(vector<Literal>& lits, int id, bool active, bool learnt) 
+		:	id_(id),
+		  active_(active),
+			learnt_(learnt),
+			lits_(lits) {}
 
 int Clause::FindWatcher(Solver* solver) {
 	if(solver->GetLitValue(lits_[1]) == kPositive) {
@@ -55,4 +53,20 @@ int Clause::GetLBD(Solver* solver) {
 		diff_levels.insert(solver->GetLevel(lit.var()));
 	}
 	return diff_levels.size();
+}
+
+bool Clause::IsLocked(Solver* solver) {
+	return solver->GetReason(lits_[1].var()).get() == this; 
+}
+
+bool Clause::IsLearnt() {
+	return learnt_;
+}
+
+bool Clause::IsActive() {
+	return active_;
+}
+
+void Clause::Deactive() {
+	active_ = false;
 }
