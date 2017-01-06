@@ -33,7 +33,7 @@ class Clause {
   void Deactive();
 
   bool operator<(const Clause& clause) const {
-  	return id_ < clause.id_;
+    return id_ < clause.id_;
   }
 
  private:

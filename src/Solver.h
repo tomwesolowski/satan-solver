@@ -114,9 +114,9 @@ class Solver {
   double avg_level = 0;
   int smalls_reduced = 0;
 
-	std::default_random_engine generator_;
-	
-	vector<int> level_;
+  std::default_random_engine generator_;
+  
+  vector<int> level_;
   vector<int> polarity_;
   
   vector< vector<RefClause > > watchers_;
