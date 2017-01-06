@@ -1,22 +1,37 @@
 #include <bits/stdc++.h>
 
-using namespace std;
-
 #include "Constants.h"
+#include "Clause.h"
 #include "Helpers.h"
 #include "Literal.h"
-#include "Clause.h"
 #include "VarDatabase.h"
-#include "Solver.h"
 
-Literal VarDatabase::GetNext(Solver* solver) {
-	int var_free = free_vars_.rbegin()->second;
-	Literal lit_pos(var_free, kPositive);
-	Literal lit_neg(var_free, kNegative);
-	Literal lit(var_free, (rand()%2 ? kPositive : kNegative));
+using std::queue;
+using std::pair;
+using std::set;
+using std::vector;
 
-	if(apps_[lit_pos.index()] - solver->watchers_[lit_neg.index()].size() 
-			> apps_[lit_neg.index()] - solver->watchers_[lit_pos.index()].size()) {
+VarDatabase::VarDatabase(SolverParameters params) {
+	decay_factor_ = params.decay_factor_;
+	rescale_factor_ = params.rescale_factor_;
+	max_activity_ = params.max_activity_;
+	max_diff_queue_size_ = params.max_diff_queue_size_;
+	max_avg_diff_ = params.max_avg_diff_;
+	decay_factor_slow_ = params.decay_factor_slow_;
+	decay_factor_fast_ = params.decay_factor_fast_;
+}
+
+int VarDatabase::GetVarCandidate() {
+	return free_vars_.rbegin()->second;
+}
+
+Literal VarDatabase::GetNext(
+		int free_var, int num_watchers_pos, int num_watchers_neg) {
+	Literal lit_pos(free_var, kPositive);
+	Literal lit_neg(free_var, kNegative);
+	Literal lit(free_var, (rand()%2 ? kPositive : kNegative));
+	if(apps_[lit_pos.index()] - num_watchers_neg
+			> apps_[lit_neg.index()] - num_watchers_pos) {
 		lit = lit_pos;
 	}
 	else {
@@ -25,123 +40,113 @@ Literal VarDatabase::GetNext(Solver* solver) {
 	return lit;
 }
 
-void VarDatabase::AddToFreeVars(Solver* solver, int var) {
+void VarDatabase::AddToFreeVars(int var) {
 	free_vars_.insert({activity_[var], var});
 	is_free_[var] = 1;
 	num_free_++;
 }
 
-void VarDatabase::PrepareFreeVars(Solver* solver) {
-	for(int i = 0; i < num_vars_; i++) {
-		AddToFreeVars(solver, i);
-	}
-}
-
-void VarDatabase::Init(Solver* solver) {
-	num_vars_ = solver->vars_.size();
+void VarDatabase::Init(int num_vars) {
+	num_vars_ = num_vars;
 	activity_.resize(num_vars_, 0);
 	is_free_.resize(num_vars_, 0);
 	apps_.resize(2*num_vars_, 0);
-	PrepareFreeVars(solver);
-}
-
-void VarDatabase::ChangeAppearance(Solver* solver, Literal lit, int val) {
-	apps_[lit.index()] += val;	
-}
-
-void VarDatabase::ChangeAppearance(Solver* solver, RefClause clause, int val) {
-	for(Literal& lit : clause->lits_) {
-		ChangeAppearance(solver, lit, val);
+	for(int i = 0; i < num_vars_; i++) {
+		AddToFreeVars(i);
 	}
 }
 
-void VarDatabase::DecayAppearances(Solver* solver) {
+void VarDatabase::ChangeAppearance(Literal lit, int val) {
+	apps_[lit.index()] += val;	
+}
+
+void VarDatabase::ChangeAppearance(RefClause clause, int val) {
+	for(Literal& lit : clause->lits_) {
+		ChangeAppearance(lit, val);
+	}
+}
+
+void VarDatabase::DecayAppearances() {
 	if(true) return; // temporary disabled.
 	for(int& app : apps_) {
 		app *= 0.8;
 	}
 }
 
-void VarDatabase::RemoveFree(Solver* solver, int var) {
+void VarDatabase::RemoveFree(int var) {
 	free_vars_.erase({activity_[var], var});
 	is_free_[var] = 0;
 	num_free_--;
 }
 
-void VarDatabase::BumpActivity(Solver* solver, int var, int value) {
-	if(IsVarFree(solver, var)) {
-		RemoveFree(solver, var);
+void VarDatabase::BumpActivity(int var, int value) {
+	if(IsVarFree(var)) {
+		RemoveFree(var);
 		activity_[var] += value;
-		AddToFreeVars(solver, var);
+		AddToFreeVars(var);
 	}
 	else {
 		activity_[var] += value;
 	}
 }
 
-void VarDatabase::BumpActivity(Solver* solver, RefClause clause, int value) {
+void VarDatabase::BumpActivity(RefClause clause, int value) {
 	for(Literal& lit : clause->lits_) {
-		BumpActivity(solver, lit.var(), value);
+		BumpActivity(lit.var(), value);
 	}
 }
 
-bool VarDatabase::IsVarFree(Solver* solver, int var) {
+bool VarDatabase::IsVarFree(int var) {
 	return is_free_[var] == 1;
 }
 
 
-int VarDatabase::GetNumFree(Solver* solver) {
+int VarDatabase::GetNumFree() {
 	return num_free_;
 }
 
-void VarDatabase::DecayActivities(Solver* solver) {
+void VarDatabase::DecayActivities() {
 	bool rescale = false;
 
 	for(int var = 0; var < num_vars_; var++) {
-		if(IsVarFree(solver, var)) {
-			RemoveFree(solver, var);
-			activity_[var] *= kDecayFactor;
-			AddToFreeVars(solver, var);
+		if(IsVarFree(var)) {
+			RemoveFree(var);
+			activity_[var] *= decay_factor_;
+			AddToFreeVars(var);
 		}
 		else {
-			activity_[var] *= kDecayFactor;
+			activity_[var] *= decay_factor_;
 		}
-		if(activity_[var] > kMaxActivity) rescale = true;
+		if(activity_[var] > max_activity_) rescale = true;
 	}
 
 	if(rescale) {
 		for(int var = 0; var < num_vars_; var++) {
-			if(IsVarFree(solver, var)) {
-				RemoveFree(solver, var);
-				activity_[var] *= kRescaleFactor;
-				AddToFreeVars(solver, var);
+			if(IsVarFree(var)) {
+				RemoveFree(var);
+				activity_[var] *= rescale_factor_;
+				AddToFreeVars(var);
 			}
 			else {
-				activity_[var] *= kRescaleFactor;
+				activity_[var] *= rescale_factor_;
 			}
 		}		
 	}
 }
 
-void VarDatabase::AdjustDecay(Solver* solver, int diff_levels) {
-	const int kMaxDiffsQueueSize = 10;
-	const int kMaxAvgDiff = 7;
-	
-	const double kDecayFactorSlow = 0.99;
-	const double kDecayFactorFast = 0.75;
-
+void VarDatabase::AdjustDecay(int diff_levels) {
 	diffs_queue_.push(diff_levels);
 	sum_diffs_ += diff_levels;
-	if(diffs_queue_.size() > kMaxDiffsQueueSize) {
+	if(diffs_queue_.size() > max_diff_queue_size_) {
 		sum_diffs_ -= diffs_queue_.front();
 		diffs_queue_.pop();
 	}
 	avg_diffs_ = sum_diffs_ / diffs_queue_.size();
 
-	if(avg_diffs_ <= kMaxAvgDiff) {
-		kDecayFactor = kDecayFactorSlow;
+	if(avg_diffs_ <= max_avg_diff_) {
+		decay_factor_ = decay_factor_slow_;
 	}
 	else {
-		kDecayFactor = kDecayFactorFast;
+		decay_factor_ = decay_factor_fast_;
 	}
 }

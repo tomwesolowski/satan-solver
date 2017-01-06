@@ -6,6 +6,7 @@ CMakeFiles/solver.dir/src/Solver.cpp.o: ./src/types/Constants.h
 CMakeFiles/solver.dir/src/Solver.cpp.o: ./src/types/Literal.h
 CMakeFiles/solver.dir/src/Solver.cpp.o: ./src/types/VarDatabase.h
 CMakeFiles/solver.dir/src/Solver.cpp.o: ./src/utils/Helpers.h
+CMakeFiles/solver.dir/src/Solver.cpp.o: src/Parameters.h
 CMakeFiles/solver.dir/src/Solver.cpp.o: src/Solver.cpp
 CMakeFiles/solver.dir/src/Solver.cpp.o: src/Solver.h
 
@@ -15,6 +16,7 @@ CMakeFiles/solver.dir/src/Test.cpp.o: ./src/types/Literal.h
 CMakeFiles/solver.dir/src/Test.cpp.o: ./src/types/VarDatabase.h
 CMakeFiles/solver.dir/src/Test.cpp.o: ./src/utils/Helpers.h
 CMakeFiles/solver.dir/src/Test.cpp.o: ./src/utils/Parser.h
+CMakeFiles/solver.dir/src/Test.cpp.o: src/Parameters.h
 CMakeFiles/solver.dir/src/Test.cpp.o: src/Solver.h
 CMakeFiles/solver.dir/src/Test.cpp.o: src/Test.cpp
 CMakeFiles/solver.dir/src/Test.cpp.o: gtest/gtest.h
@@ -40,6 +42,7 @@ CMakeFiles/solver.dir/src/Test.cpp.o: gtest/gtest/internal/gtest-string.h
 CMakeFiles/solver.dir/src/Test.cpp.o: gtest/gtest/internal/gtest-tuple.h
 CMakeFiles/solver.dir/src/Test.cpp.o: gtest/gtest/internal/gtest-type-util.h
 
+CMakeFiles/solver.dir/src/types/Clause.cpp.o: ./src/Parameters.h
 CMakeFiles/solver.dir/src/types/Clause.cpp.o: ./src/Solver.h
 CMakeFiles/solver.dir/src/types/Clause.cpp.o: ./src/utils/Helpers.h
 CMakeFiles/solver.dir/src/types/Clause.cpp.o: src/types/Clause.cpp
@@ -52,7 +55,7 @@ CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Constants.h
 CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Literal.cpp
 CMakeFiles/solver.dir/src/types/Literal.cpp.o: src/types/Literal.h
 
-CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/Solver.h
+CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/Parameters.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: ./src/utils/Helpers.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/Clause.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/Constants.h
@@ -61,4 +64,15 @@ CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.cpp
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o: src/types/VarDatabase.h
 
 CMakeFiles/solver.dir/src/utils/Helpers.cpp.o: src/utils/Helpers.cpp
+
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: ./src/types/Clause.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: ./src/types/VarDatabase.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/Parameters.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/Solver.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/types/Clause.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/types/Constants.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/types/Literal.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/utils/Helpers.h
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/utils/Parser.cpp
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o: src/utils/Parser.h
 

@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tomek/satan-solver/satan-solver
+CMAKE_SOURCE_DIR = /home/tomek/Dropbox/satan-solver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tomek/satan-solver/satan-solver
+CMAKE_BINARY_DIR = /home/tomek/Dropbox/satan-solver
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/satan-solver/satan-solver/CMakeFiles /home/tomek/satan-solver/satan-solver/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/Dropbox/satan-solver/CMakeFiles /home/tomek/Dropbox/satan-solver/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/satan-solver/satan-solver/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tomek/Dropbox/satan-solver/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -258,6 +258,30 @@ src/utils/Helpers.cpp.s:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Helpers.cpp.s
 .PHONY : src/utils/Helpers.cpp.s
 
+src/utils/Parser.o: src/utils/Parser.cpp.o
+.PHONY : src/utils/Parser.o
+
+# target to build an object file
+src/utils/Parser.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Parser.cpp.o
+.PHONY : src/utils/Parser.cpp.o
+
+src/utils/Parser.i: src/utils/Parser.cpp.i
+.PHONY : src/utils/Parser.i
+
+# target to preprocess a source file
+src/utils/Parser.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Parser.cpp.i
+.PHONY : src/utils/Parser.cpp.i
+
+src/utils/Parser.s: src/utils/Parser.cpp.s
+.PHONY : src/utils/Parser.s
+
+# target to generate assembly for a file
+src/utils/Parser.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/utils/Parser.cpp.s
+.PHONY : src/utils/Parser.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,6 +309,9 @@ help:
 	@echo "... src/utils/Helpers.o"
 	@echo "... src/utils/Helpers.i"
 	@echo "... src/utils/Helpers.s"
+	@echo "... src/utils/Parser.o"
+	@echo "... src/utils/Parser.i"
+	@echo "... src/utils/Parser.s"
 .PHONY : help
 
 

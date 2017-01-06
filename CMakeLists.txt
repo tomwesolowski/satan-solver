@@ -13,6 +13,7 @@ include_directories (gtest)
 link_directories (lib)
 
 add_executable(${PROGRAM_NAME} ${SRC}/utils/Helpers.cpp
+															 ${SRC}/utils/Parser.cpp
 															 ${SRC}/types/Literal.cpp
 															 ${SRC}/types/Clause.cpp
 															 ${SRC}/types/VarDatabase.cpp

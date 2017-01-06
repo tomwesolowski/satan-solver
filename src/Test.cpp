@@ -1,22 +1,40 @@
 #include <bits/stdc++.h>
 
-using namespace std;
+#include "gtest.h"
 
 #include "Constants.h"
-#include "Literal.h"
-#include "Helpers.h"
 #include "Clause.h"
-#include "Solver.h"
+#include "Helpers.h"
+#include "Literal.h"
 #include "Parser.h"
-#include "gtest.h"
+#include "Solver.h"
 
 TEST(TestSample, Sample) {
 	ifstream ifs("./tests/simple.cnf");
+	SolverParameters params;
 
 	Parser parser;
-	Solver solver;
+	Solver solver(params);
 	parser.Parse(ifs, solver);
   solver.Solve();
-  solver.Verify();
+  solver.Verify(true);
   solver.Print();
+}
+
+TEST(uf50, Sample) {
+	for(int i = 1; i < 100; i++) {
+		std::ostringstream oss;
+		oss << "./tests/uf50/uf50-0" << i << ".cnf";
+		ifstream ifs(oss.str());
+
+		SolverParameters params;
+		Parser parser;
+		Solver solver(params);
+
+		parser.Parse(ifs, solver);	
+	  solver.Solve();
+	  oss.clear();
+	  oss << "Test #" << i << " failed.";
+	  Assert(solver.Verify(true), oss.str()); // all models are solvable.
+	}	
 }

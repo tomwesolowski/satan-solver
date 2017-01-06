@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/solver.dir/src/utils/Helpers.cpp.o"
+  "CMakeFiles/solver.dir/src/utils/Parser.cpp.o"
   "CMakeFiles/solver.dir/src/types/Literal.cpp.o"
   "CMakeFiles/solver.dir/src/types/Clause.cpp.o"
   "CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o"

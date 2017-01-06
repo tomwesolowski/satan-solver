@@ -20,7 +20,7 @@ Clause::Clause(vector<Literal>& lits, int id) {
 }
 
 bool Clause::locked(Solver* solver) {
-	return solver->reason_[lits_[1].var()].get() == this; 
+	return solver->GetReason(lits_[1].var()).get() == this; 
 }
 
 int Clause::FindWatcher(Solver* solver) {
@@ -52,7 +52,7 @@ double Clause::GetFulfillment(Solver* solver) {
 int Clause::GetLBD(Solver* solver) {
 	set<int> diff_levels;
 	for(Literal& lit : lits_) {
-		diff_levels.insert(solver->level_[lit.var()]);
+		diff_levels.insert(solver->GetLevel(lit.var()));
 	}
 	return diff_levels.size();
 }

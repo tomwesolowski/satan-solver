@@ -7,8 +7,9 @@ CMakeFiles/solver.dir/src/Solver.cpp.o
  ./src/types/Literal.h
  ./src/types/VarDatabase.h
  ./src/utils/Helpers.h
- /home/tomek/satan-solver/satan-solver/src/Solver.cpp
- /home/tomek/satan-solver/satan-solver/src/Solver.h
+ /home/tomek/Dropbox/satan-solver/src/Parameters.h
+ /home/tomek/Dropbox/satan-solver/src/Solver.cpp
+ /home/tomek/Dropbox/satan-solver/src/Solver.h
 CMakeFiles/solver.dir/src/Test.cpp.o
  ./src/types/Clause.h
  ./src/types/Constants.h
@@ -16,8 +17,9 @@ CMakeFiles/solver.dir/src/Test.cpp.o
  ./src/types/VarDatabase.h
  ./src/utils/Helpers.h
  ./src/utils/Parser.h
- /home/tomek/satan-solver/satan-solver/src/Solver.h
- /home/tomek/satan-solver/satan-solver/src/Test.cpp
+ /home/tomek/Dropbox/satan-solver/src/Parameters.h
+ /home/tomek/Dropbox/satan-solver/src/Solver.h
+ /home/tomek/Dropbox/satan-solver/src/Test.cpp
  gtest/gtest.h
  gtest/gtest/gtest-death-test.h
  gtest/gtest/gtest-message.h
@@ -41,24 +43,36 @@ CMakeFiles/solver.dir/src/Test.cpp.o
  gtest/gtest/internal/gtest-tuple.h
  gtest/gtest/internal/gtest-type-util.h
 CMakeFiles/solver.dir/src/types/Clause.cpp.o
+ ./src/Parameters.h
  ./src/Solver.h
  ./src/utils/Helpers.h
- /home/tomek/satan-solver/satan-solver/src/types/Clause.cpp
- /home/tomek/satan-solver/satan-solver/src/types/Clause.h
- /home/tomek/satan-solver/satan-solver/src/types/Constants.h
- /home/tomek/satan-solver/satan-solver/src/types/Literal.h
- /home/tomek/satan-solver/satan-solver/src/types/VarDatabase.h
+ /home/tomek/Dropbox/satan-solver/src/types/Clause.cpp
+ /home/tomek/Dropbox/satan-solver/src/types/Clause.h
+ /home/tomek/Dropbox/satan-solver/src/types/Constants.h
+ /home/tomek/Dropbox/satan-solver/src/types/Literal.h
+ /home/tomek/Dropbox/satan-solver/src/types/VarDatabase.h
 CMakeFiles/solver.dir/src/types/Literal.cpp.o
- /home/tomek/satan-solver/satan-solver/src/types/Constants.h
- /home/tomek/satan-solver/satan-solver/src/types/Literal.cpp
- /home/tomek/satan-solver/satan-solver/src/types/Literal.h
+ /home/tomek/Dropbox/satan-solver/src/types/Constants.h
+ /home/tomek/Dropbox/satan-solver/src/types/Literal.cpp
+ /home/tomek/Dropbox/satan-solver/src/types/Literal.h
 CMakeFiles/solver.dir/src/types/VarDatabase.cpp.o
- ./src/Solver.h
+ ./src/Parameters.h
  ./src/utils/Helpers.h
- /home/tomek/satan-solver/satan-solver/src/types/Clause.h
- /home/tomek/satan-solver/satan-solver/src/types/Constants.h
- /home/tomek/satan-solver/satan-solver/src/types/Literal.h
- /home/tomek/satan-solver/satan-solver/src/types/VarDatabase.cpp
- /home/tomek/satan-solver/satan-solver/src/types/VarDatabase.h
+ /home/tomek/Dropbox/satan-solver/src/types/Clause.h
+ /home/tomek/Dropbox/satan-solver/src/types/Constants.h
+ /home/tomek/Dropbox/satan-solver/src/types/Literal.h
+ /home/tomek/Dropbox/satan-solver/src/types/VarDatabase.cpp
+ /home/tomek/Dropbox/satan-solver/src/types/VarDatabase.h
 CMakeFiles/solver.dir/src/utils/Helpers.cpp.o
- /home/tomek/satan-solver/satan-solver/src/utils/Helpers.cpp
+ /home/tomek/Dropbox/satan-solver/src/utils/Helpers.cpp
+CMakeFiles/solver.dir/src/utils/Parser.cpp.o
+ ./src/types/Clause.h
+ ./src/types/VarDatabase.h
+ /home/tomek/Dropbox/satan-solver/src/Parameters.h
+ /home/tomek/Dropbox/satan-solver/src/Solver.h
+ /home/tomek/Dropbox/satan-solver/src/types/Clause.h
+ /home/tomek/Dropbox/satan-solver/src/types/Constants.h
+ /home/tomek/Dropbox/satan-solver/src/types/Literal.h
+ /home/tomek/Dropbox/satan-solver/src/utils/Helpers.h
+ /home/tomek/Dropbox/satan-solver/src/utils/Parser.cpp
+ /home/tomek/Dropbox/satan-solver/src/utils/Parser.h
