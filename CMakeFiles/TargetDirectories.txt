@@ -1,1 +1,0 @@
-/home/tomek/Dropbox/satan-solver/CMakeFiles/solver.dir
